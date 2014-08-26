@@ -1,0 +1,254 @@
+HA$PBExportHeader$m_view.srm
+$PBExportComments$Extension View Menu class
+forward
+global type m_view from pfc_m_view
+end type
+end forward
+
+global type m_view from pfc_m_view
+end type
+global m_view m_view
+
+on m_view.create
+m_view=this
+call super::create
+end on
+
+on m_view.destroy
+call super::destroy
+end on
+
+type m_viewitem from pfc_m_view`m_viewitem within m_view
+end type
+
+on m_viewitem.create
+call super::create
+end on
+
+on m_viewitem.destroy
+call super::destroy
+end on
+
+type m_viewdisplay from pfc_m_view`m_viewdisplay within m_viewitem
+end type
+
+on m_viewdisplay.create
+call super::create
+this.text = "&Ver"
+this.microhelp = "Contiene comandos sobre visualizaci$$HEX1$$f300$$ENDHEX$$n"
+end on
+
+on m_viewdisplay.destroy
+call super::destroy
+end on
+
+type m_largeicon from pfc_m_view`m_largeicon within m_viewdisplay
+end type
+
+on m_largeicon.create
+call super::create
+this.text = "Iconos"
+this.microhelp = ""
+end on
+
+on m_largeicon.destroy
+call super::destroy
+end on
+
+type m_smallicon from pfc_m_view`m_smallicon within m_viewdisplay
+end type
+
+on m_smallicon.create
+call super::create
+this.text = "Vistas en miniatura"
+this.microhelp = ""
+end on
+
+on m_smallicon.destroy
+call super::destroy
+end on
+
+type m_list from pfc_m_view`m_list within m_viewdisplay
+end type
+
+on m_list.create
+call super::create
+this.text = "Lista"
+this.microhelp = ""
+end on
+
+on m_list.destroy
+call super::destroy
+end on
+
+type m_details from pfc_m_view`m_details within m_viewdisplay
+end type
+
+on m_details.create
+call super::create
+this.text = "Detalles"
+this.microhelp = ""
+end on
+
+on m_details.destroy
+call super::destroy
+end on
+
+type m_dash11 from pfc_m_view`m_dash11 within m_viewitem
+end type
+
+on m_dash11.create
+call super::create
+end on
+
+on m_dash11.destroy
+call super::destroy
+end on
+
+type m_arrangeicons from pfc_m_view`m_arrangeicons within m_viewitem
+end type
+
+on m_arrangeicons.create
+call super::create
+this.text = "Organizar iconos"
+this.microhelp = "Comandos para organizar elementos"
+end on
+
+on m_arrangeicons.destroy
+call super::destroy
+end on
+
+type m_1 from pfc_m_view`m_1 within m_arrangeicons
+end type
+
+on m_1.create
+call super::create
+end on
+
+on m_1.destroy
+call super::destroy
+end on
+
+type m_2 from pfc_m_view`m_2 within m_arrangeicons
+end type
+
+on m_2.create
+call super::create
+end on
+
+on m_2.destroy
+call super::destroy
+end on
+
+type m_3 from pfc_m_view`m_3 within m_arrangeicons
+end type
+
+on m_3.create
+call super::create
+end on
+
+on m_3.destroy
+call super::destroy
+end on
+
+type m_4 from pfc_m_view`m_4 within m_arrangeicons
+end type
+
+on m_4.create
+call super::create
+end on
+
+on m_4.destroy
+call super::destroy
+end on
+
+type m_5 from pfc_m_view`m_5 within m_arrangeicons
+end type
+
+on m_5.create
+call super::create
+end on
+
+on m_5.destroy
+call super::destroy
+end on
+
+type m_6 from pfc_m_view`m_6 within m_arrangeicons
+end type
+
+on m_6.create
+call super::create
+end on
+
+on m_6.destroy
+call super::destroy
+end on
+
+type m_7 from pfc_m_view`m_7 within m_arrangeicons
+end type
+
+on m_7.create
+call super::create
+end on
+
+on m_7.destroy
+call super::destroy
+end on
+
+type m_8 from pfc_m_view`m_8 within m_arrangeicons
+end type
+
+on m_8.create
+call super::create
+end on
+
+on m_8.destroy
+call super::destroy
+end on
+
+type m_9 from pfc_m_view`m_9 within m_arrangeicons
+end type
+
+on m_9.create
+call super::create
+end on
+
+on m_9.destroy
+call super::destroy
+end on
+
+type m_10 from pfc_m_view`m_10 within m_arrangeicons
+end type
+
+on m_10.create
+call super::create
+end on
+
+on m_10.destroy
+call super::destroy
+end on
+
+type m_dash12 from pfc_m_view`m_dash12 within m_arrangeicons
+end type
+
+on m_dash12.create
+call super::create
+end on
+
+on m_dash12.destroy
+call super::destroy
+end on
+
+type m_autoarrange from pfc_m_view`m_autoarrange within m_arrangeicons
+end type
+
+on m_autoarrange.create
+call super::create
+this.text = "Autom$$HEX1$$e100$$ENDHEX$$tico"
+this.microhelp = ""
+end on
+
+on m_autoarrange.destroy
+call super::destroy
+end on
+
