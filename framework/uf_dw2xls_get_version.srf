@@ -1,0 +1,18 @@
+HA$PBExportHeader$uf_dw2xls_get_version.srf
+global type uf_dw2xls_get_version from function_object
+end type
+
+forward prototypes
+global function string uf_dw2xls_get_version ()
+end prototypes
+
+global function string uf_dw2xls_get_version ();return '2.1.0.1'
+
+/* * history * *
+
+2.1.0.1 
+- Fixed of_save_dw2sheet/of_save_ds2sheet metadata cache
+
+ * * * * * * * */
+end function
+
