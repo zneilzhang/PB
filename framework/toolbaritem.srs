@@ -1,0 +1,31 @@
+HA$PBExportHeader$toolbaritem.srs
+global type toolbaritem from structure
+	string		text
+	string		tiptext
+	string		image
+	boolean		enabled
+	boolean		visible
+	boolean		displaytext
+	boolean		separator
+	boolean		toggle
+	long		width
+	long		height
+	long		x
+	long		y
+	point		paintregion[]
+	boolean		mouseover
+	boolean		mousedown
+	long		backcolor1
+	long		backcolor2
+	long		bordercolor
+	long		separatorcolor
+	long		imagesize
+	long		imageindex
+	boolean		objecttype
+	dragobject		objectreference
+	boolean		hidden
+	long		textwidth
+	long		textheight
+	long		position
+end type
+

@@ -1,0 +1,9 @@
+HA$PBExportHeader$powerdockdocument.srs
+global type powerdockdocument from structure
+	string		text
+	string		image
+	boolean		iswindow
+	window		window
+	userobject		userobject
+end type
+

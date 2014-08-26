@@ -1,0 +1,23 @@
+HA$PBExportHeader$strgroupbox.srs
+global type strgroupbox from structure
+	string		text
+	string		fontfamily
+	long		fontsize
+	boolean		bold
+	boolean		italics
+	boolean		strikeout
+	boolean		underline
+	long		fontcolor
+	long		backcolor
+	long		gradient1
+	long		gradient2
+	long		bordercolor
+	long		image
+	long		width
+	long		height
+	string		gradientdirection
+	long		style
+	long		headercolor1
+	long		headercolor2
+end type
+
