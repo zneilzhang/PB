@@ -1,0 +1,17 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "framework\\advguicontrols.pbl" "";
+@end;
+@begin Objects
+ "framework\\u_cst_groupbox.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_toolbarstrip.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_buttonlistbar.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_fonts.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_tabpage.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_xpheader.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_tabcontrol.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_powerdock.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_statictext.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_xplistbar.sru" "framework\\advguicontrols.pbl";
+ "framework\\u_cst_shortcutbar.sru" "framework\\advguicontrols.pbl";
+@end;
