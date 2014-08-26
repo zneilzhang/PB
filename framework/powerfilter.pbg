@@ -1,0 +1,24 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "framework\\powerfilter.pbl" "";
+@end;
+@begin Objects
+ "framework\\d_powerfilter.srd" "framework\\powerfilter.pbl";
+ "framework\\d_powerfilter_customparm.srd" "framework\\powerfilter.pbl";
+ "framework\\d_powerfilter_customfilter.srd" "framework\\powerfilter.pbl";
+ "framework\\w_powerfilter_prompt_to_restore.srw" "framework\\powerfilter.pbl";
+ "framework\\s_powerfilter_restore_parms.srs" "framework\\powerfilter.pbl";
+ "framework\\u_powerfilter_checkbox.sru" "framework\\powerfilter.pbl";
+ "framework\\d_powerfilter_ddbuttons.srd" "framework\\powerfilter.pbl";
+ "framework\\u_powerfilter_predeffilters.sru" "framework\\powerfilter.pbl";
+ "framework\\d_powerfilter_languages.srd" "framework\\powerfilter.pbl";
+ "framework\\s_powerfilter_parms.srs" "framework\\powerfilter.pbl";
+ "framework\\d_powerfilter_filterlist.srd" "framework\\powerfilter.pbl";
+ "framework\\d_powerfilter_filteropts.srd" "framework\\powerfilter.pbl";
+ "framework\\d_powerfilter_parmlist.srd" "framework\\powerfilter.pbl";
+ "framework\\w_powerfilter_custom.srw" "framework\\powerfilter.pbl";
+ "framework\\u_powerfilter_dropdown.sru" "framework\\powerfilter.pbl";
+ "framework\\n_cst_powerfilter.sru" "framework\\powerfilter.pbl";
+ "framework\\d_powerfilter_monthopts.srd" "framework\\powerfilter.pbl";
+ "framework\\u_powerfilter_monthopts.sru" "framework\\powerfilter.pbl";
+@end;
