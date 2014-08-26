@@ -1,0 +1,67 @@
+HA$PBExportHeader$f_valida_vigencia_usuario.srf
+global type f_valida_vigencia_usuario from function_object
+end type
+
+forward prototypes
+global function boolean f_valida_vigencia_usuario (date ad_fecha, string as_pass, integer ai_usuario)
+end prototypes
+
+global function boolean f_valida_vigencia_usuario (date ad_fecha, string as_pass, integer ai_usuario);STRING	ls_estatus, ls_parm[]
+DATE		ld_vigencia_inicio,	ld_vigencia_fin
+STRING	ls_forza
+LONG		ll_num
+/*
+//JACV-20090526-Verifica que el usuario y pwd existan considerendo el pwd encriptado
+//una forma es como ya se valido usr y pwd, se puede omitir el pwd o en su defecto de encriptar el pwd del usr para que haga match
+IF NOT gf_valida_usuario (ai_usuario, as_pass)  THEN RETURN FALSE
+	
+SELECT 	estatus
+INTO 		:ls_estatus
+FROM 	ek010ab
+WHERE 	num	=	:ai_usuario 
+AND		( CAST ( DECRYPT(pass, :ai_usuario  ) as char(100) )  = :as_pass ) ;
+
+IF SQLCA.SQLCode <> 0 AND SQLCA.SQLCode <> 100 THEN
+	IF SQLCA.SQLCode < 0 THEN
+		gnv_manejo_errores.inv_errorparam.is_sqlerrtext	= SQLCA.SQLErrText
+		gnv_manejo_errores.inv_errorparam.ipo_inerror	= THIS
+		gnv_manejo_errores.of_messagebox(string(SQLCA.SQLDBCode), ls_parm, "Aviso")
+   ELSE
+   	MessageBox(	gs_Titulo, &
+						'Ha Ocurrido un Error al Leer la tabla Usuarios ' + &
+						SQLCA.SQLErrText, &
+						exclamation!)
+	END IF
+	RETURN FALSE
+END IF
+
+IF ls_estatus	<>	'A' THEN 
+	MessageBox ( gs_Titulo, "Su usuario ha sido desactivado" )
+	RETURN FALSE
+END IF
+
+SELECT 	vigencia_inicio,
+			vigencia_fin
+INTO 		:ld_vigencia_inicio,
+			:ld_vigencia_fin
+FROM 	ek010ab
+WHERE 	num	=	:ai_usuario 
+AND		( CAST ( DECRYPT(pass, :ai_usuario  ) as char(100) )  = :as_pass ) ;
+
+
+IF ISNULL(ld_vigencia_inicio) or ISNULL(ld_vigencia_fin) then
+	RETURN TRUE
+END IF
+
+IF ad_fecha	>=	ld_vigencia_inicio AND  ad_fecha	<=	ld_vigencia_fin THEN
+	RETURN	TRUE
+END IF
+
+MessageBox(	gs_Titulo, &
+				'El periodo de vigencia de su usuario a terminado. ', &
+				exclamation!)
+RETURN	FALSE
+*/
+return true
+end function
+

@@ -1,0 +1,38 @@
+HA$PBExportHeader$f_valida_vigencia_pass.srf
+global type f_valida_vigencia_pass from function_object
+end type
+
+forward prototypes
+global function boolean f_valida_vigencia_pass (date ad_fecha, string as_pass, integer ai_usuario)
+end prototypes
+
+global function boolean f_valida_vigencia_pass (date ad_fecha, string as_pass, integer ai_usuario);string	ls_periodo_pwd
+date		ld_fecha_ultimo_cambio 
+long		ll_dias_cambio
+string	ls_forza_cambio_pwd
+String	ls_estatus
+
+ls_estatus	= ''
+
+SELECT	periodo_pwd, dias_cambio_pwd
+INTO		:ls_periodo_pwd, :ll_dias_cambio
+FROM		datos_compania;
+
+IF ls_periodo_pwd = 'N'	THEN RETURN TRUE
+
+SELECT	forza_cambio_pwd,			fecha_ult_cambio_pwd
+INTO		:ls_forza_cambio_pwd,	:ld_fecha_ultimo_cambio
+FROM		ek010ab
+WHERE		num	=	:ai_usuario 
+AND		( CAST ( DECRYPT(pass, :ai_usuario  ) as char(100) )  = :as_pass ) ;
+
+IF ls_forza_cambio_pwd = 'N' THEN RETURN TRUE
+
+ld_fecha_ultimo_cambio	=	RelativeDate(ld_fecha_ultimo_cambio, ll_dias_cambio)
+
+IF ad_fecha < ld_fecha_ultimo_cambio THEN RETURN TRUE
+
+RETURN FALSE
+
+end function
+

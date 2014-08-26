@@ -1,0 +1,47 @@
+HA$PBExportHeader$gf_binario_a_dec.srf
+$PBExportComments$(LAC) Funci$$HEX1$$f300$$ENDHEX$$n que convierte un n$$HEX1$$fa00$$ENDHEX$$mero binario a decimal
+global type gf_binario_a_dec from function_object
+end type
+
+forward prototypes
+global function integer gf_binario_a_dec (string as_num_binario)
+end prototypes
+
+global function integer gf_binario_a_dec (string as_num_binario);//------------------------------------------------------------------
+//  MODULO/FUNCION	: gf_binario_a_dec
+//
+//  DESCRIPCION		: Funci$$HEX1$$f300$$ENDHEX$$n que convierte un n$$HEX1$$fa00$$ENDHEX$$mero binario a decimal
+// 
+//  EVENTO/ARGUMENTOS: 
+//		as_num_binario	: String del n$$HEX1$$fa00$$ENDHEX$$mero binario, ej: "10011"
+//
+//  DEVUELVE			:
+//		El n$$HEX1$$fa00$$ENDHEX$$mero decimal	:	N$$HEX1$$fa00$$ENDHEX$$mero decimal si no hubo errores
+//		 -1						:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  22/MAR/00	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+Integer	li_contador, li_longitud, li_resultado
+String		ls_bit
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+SetPointer(Hourglass!)
+
+as_num_binario = Trim(as_num_binario)
+li_longitud = len(as_num_binario)
+li_resultado = 0
+For li_contador = li_longitud To 1 Step - 1
+	ls_bit = Mid ( as_num_binario, li_contador , 1)
+	li_resultado = li_resultado + ((2 ^ (li_longitud - li_contador))* integer(ls_bit)) 
+Next
+Return li_resultado
+
+end function
+

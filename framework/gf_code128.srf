@@ -1,0 +1,87 @@
+HA$PBExportHeader$gf_code128.srf
+global type gf_code128 from function_object
+end type
+
+forward prototypes
+global function string gf_code128 (string as_numero)
+end prototypes
+
+global function string gf_code128 (string as_numero);INTEGER	li_i, li_Sum, li_Weighting, li_CharValue, li_CheckSumValue
+STRING	ls_codigo, ls_Numero, ls_TempString, ls_StartChar, ls_CharValue
+STRING	ls_CheckSum
+
+// Initialize input and output strings
+ls_Codigo		= ""
+ls_Numero		= TRIM(as_Numero)
+
+// Throw away non-numeric data
+
+ls_TempString = ""
+
+FOR li_i = 1 TO LEN(ls_Numero)
+	IF IsNumber(Mid(ls_Numero, li_i, 1)) THEN
+		ls_TempString += Mid(ls_Numero, li_i, 1)
+	END IF
+NEXT
+
+// If not an even number of digits, add a leading 0
+IF	MOD(Len(ls_TempString), 2) = 1 Then
+	ls_TempString = "0" + ls_TempString
+END IF
+
+li_Sum			= 105
+ls_StartChar		= '}'
+li_Weighting	= 1
+
+// Calculate the checksum, mod 103 and build output string
+FOR li_i = 1 TO Len(ls_TempString) Step 2
+	// Break string into pairs of digits and get value
+	ls_CharValue = Mid(ls_TempString, li_i, 2)
+	li_CharValue	= INTEGER ( ls_CharValue )
+	
+	//Multiply value times weighting and add to sum
+	li_Sum += ( li_CharValue * li_Weighting)
+	li_Weighting += 1
+
+	// translate value to ASCII and save in BarTextOut
+	IF li_CharValue < 90 Then
+		ls_Codigo = ls_Codigo + CHAR(li_CharValue + 33)
+	ELSE
+		ls_Codigo = ls_Codigo + CHAR(li_CharValue + 104)
+	END IF
+NEXT
+
+// Find the remainder when Sum is divided by 103
+li_CheckSumValue = MOD (li_Sum,103)
+
+// Translate that value to an ASCII character
+IF li_CheckSumValue < 90 THEN
+	ls_CheckSum = CHAR(li_CheckSumValue + 33)
+ELSE
+	ls_CheckSum = CHAR(li_CheckSumValue + 104)
+END IF
+
+// Build ouput string, trailing space for Windows rasterization bug
+ls_Codigo = ls_StartChar + ls_Codigo + ls_CheckSum + "~~ "
+
+// Replace all quote characters with duplicate bar code character in slot 226
+// fixing MS Word mailmerge bug
+//BarCodeOut = ""
+//For II = 1 To Len(BarTempOut)
+//  'Find the ASCII value of the current character
+//  ThisChar = (Asc(Mid(BarTempOut, II, 1)))
+//  If ThisChar = 34 Then
+//    BarCodeOut = BarCodeOut & Chr(226)
+//  Else
+//    BarCodeOut = BarCodeOut & Mid(BarTempOut, II, 1)
+//  End If
+//Next II
+//
+//'Return the string
+//Bar128SubsetC = BarCodeOut
+//End Function
+//
+
+RETURN ls_Codigo
+end function
+

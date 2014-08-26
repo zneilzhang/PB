@@ -1,0 +1,72 @@
+HA$PBExportHeader$gf_codeean13.srf
+global type gf_codeEAN13 from function_object
+end type
+
+forward prototypes
+global function string gf_codeean13 (string tcstring)
+end prototypes
+
+global function string gf_codeean13 (string tcstring);//*------------------------------------------------------ 
+//* FUNCTION CODIGO EAN-13 
+//*------------------------------------------------------ 
+//* Convierte un string para ser impreso con 
+//* fuente True Type "PF EAN P36" $$HEX2$$f3002000$$ENDHEX$$"PF EAN P72" 
+//* PARAMETROS: 
+//* tcString: Caracter de 12 d$$HEX1$$ed00$$ENDHEX$$gitos (0..9) 
+//* USO: _StrToEan13('123456789012') 
+//* RETORNA: Caracter 
+//*------------------------------------------------------ 
+
+string lcCod, lcLat, lcMed, lcRet, lcRet1, lcJuego, lcIni, lcResto //, laJuego(10) 
+integer lnI, lnCheckSum, lnAux, lnPri 
+
+lcRet = TRIM(tcString) 
+IF Len(lcRet) <> 12 then 
+//*--- Error en par$$HEX1$$e100$$ENDHEX$$metro 
+//*--- debe tener un largo = 12 
+RETURN lcRet 
+END IF 
+//*--- Genero d$$HEX1$$ed00$$ENDHEX$$gito de control 
+lnCheckSum = 0 
+FOR lnI = 1 TO 12 
+IF MOD(lnI,2) = 0 then 
+lnCheckSum = lnCheckSum + integer(Mid(lcRet,lnI,1)) * 3 
+ELSE 
+lnCheckSum = lnCheckSum + integer(Mid(lcRet,lnI,1)) * 1 
+END IF 
+END FOR 
+lnAux = MOD(lnCheckSum,10) 
+IF lnAux = 0 then lcRet1="0" else lcRet1=string(10 - lnAux) 
+
+lcRet = lcRet+ lcRet1 
+
+//*--- Para imprimir con fuente True Type PF_EAN_PXX 
+//*--- 1er. d$$HEX1$$ed00$$ENDHEX$$gito (lnPri) 
+lnPri = integer(LEFT(lcRet,1)) 
+//*--- Tabla de Juegos de Caracteres 
+//*--- seg$$HEX1$$fa00$$ENDHEX$$n 'lnPri' ($$HEX1$$a100$$ENDHEX$$NO CAMBIAR!) 
+string laJuego[10] ={ 'AAAAAACCCCCC', 'AABABBCCCCCC', 'AABBABCCCCCC', 'AABBBACCCCCC', 'ABAABBCCCCCC', 'ABBAABCCCCCC', 'ABBBAACCCCCC', 'ABABABCCCCCC', 'ABABBACCCCCC', 'ABBABACCCCCC' } 
+//*--- Caracter inicial (fuera del c$$HEX1$$f300$$ENDHEX$$digo) 
+lcIni = Char(lnPri + 35) 
+//*--- Caracteres lateral y central 
+lcLat = Char(33) 
+lcMed = Char(45) 
+//*--- Resto de los caracteres 
+lcResto = Mid(lcRet,2,12) 
+FOR lnI = 1 TO 12 
+lcJuego = Mid(laJuego [lnPri + 1], lnI, 1) 
+CHOOSE CASE lcJuego 
+CASE 'A' 
+lcResto = Replace(lcResto,lnI,1,Char(integer(Mid(lcResto,lnI,1)) + 48)) 
+CASE 'B' 
+lcResto = Replace(lcResto,lnI,1,Char(integer(Mid(lcResto,lnI,1)) + 65)) 
+CASE 'C' 
+lcResto = Replace(lcResto,lnI,1,Char(Integer(Mid(lcResto,lnI,1)) + 97)) 
+END CHOOSE 
+END FOR 
+//*--- Armo c$$HEX1$$f300$$ENDHEX$$digo 
+lcCod = lcIni + lcLat + Mid(lcResto,1,6) + lcMed + Mid(lcResto,7,6) + lcLat 
+
+RETURN lcCod
+end function
+

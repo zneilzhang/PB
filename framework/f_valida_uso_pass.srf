@@ -1,0 +1,122 @@
+HA$PBExportHeader$f_valida_uso_pass.srf
+global type f_valida_uso_pass from function_object
+end type
+
+forward prototypes
+global function boolean f_valida_uso_pass (string as_pass, string as_usuario, string as_nombre)
+global function boolean f_valida_uso_pass (string as_pass, long ai_usuario, string as_nombre, string as_pass_ant, n_tr atr_cnx)
+end prototypes
+
+global function boolean f_valida_uso_pass (string as_pass, string as_usuario, string as_nombre);integer li_length_pass
+boolean lb_numerico
+
+li_length_pass = len(as_pass)
+IF li_length_pass < 10 THEN
+	Messagebox("Password Invalido","El Password debe contener mas de 10 Caracteres")
+	return FALSE
+END IF
+
+lb_numerico = Match(as_pass, "[0-9a-zA-Z]+")
+//lb_letras = Match(as_pass, [])
+IF lb_numerico = FALSE THEN
+	Messagebox("Password Invalido","El Password debe estar Conformada por un Conjunto Alfa-Num$$HEX1$$e900$$ENDHEX$$rico")
+	return FALSE
+END IF
+
+
+end function
+
+global function boolean f_valida_uso_pass (string as_pass, long ai_usuario, string as_nombre, string as_pass_ant, n_tr atr_cnx);integer li_length_pass, li_pos, li_found, LI_NPASS, li_i
+boolean lb_numerico, lb_isletra=false, lb_isnumero=false
+string ls_usuario, ls_nombre, ls_temp, ls_letra, ls_upletra, ls_ultimo_pass
+long ll_found, ll_found2
+datastore ldst_usrpwd
+
+li_length_pass = len(as_pass)
+IF li_length_pass < 10 THEN
+	Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a debe contener mas de 10 Caracteres")
+	return FALSE
+END IF
+
+lb_numerico = Match(as_pass, "[0-9a-zA-Z]+")
+IF lb_numerico = FALSE THEN
+	Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a debe estar Conformada por un Conjunto Alfa-Num$$HEX1$$e900$$ENDHEX$$rico")
+	return FALSE
+ELSE
+	FOR li_i = 1 TO len(as_pass)
+		ls_letra = mid(as_pass, li_i, 1)
+		ls_upletra = upper(ls_letra)
+		choose case ls_upletra
+			case 'A' to 'Z'
+				lb_isletra = true
+		end choose
+		IF IsNumber(ls_letra) = TRUE THEN
+			lb_isnumero = true
+		end if
+	NEXT
+	IF lb_isletra = FALSE or lb_isnumero = FALSE THEN
+		If lb_isletra = FALSE Then
+			Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a debe Contener al Menos una Letra")
+		Else
+			Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a debe Contener al Menos un Caracter Num$$HEX1$$e900$$ENDHEX$$rico")
+		End if
+		return FALSE
+	END IF
+END IF
+
+ls_usuario = string(ai_usuario, '0000000')
+li_pos = pos(upper(as_pass), 'ARA')
+IF li_pos = 0 THEN
+	li_pos = pos(upper(as_pass), 'PASSWORD')
+	IF li_pos = 0 THEN
+		li_pos = pos(upper(as_pass), upper(ls_usuario))
+		IF li_pos = 0 THEN
+			ls_nombre = as_nombre
+			DO
+				li_found = pos(ls_nombre,' ')
+				IF li_found = 0 Then
+					li_pos = pos(upper(as_pass), upper(ls_nombre))
+				Else
+					ls_temp = ls_nombre
+					ls_nombre = mid(ls_nombre, li_found+1)
+					li_pos = pos(upper(as_pass), upper(mid(ls_temp, 1, li_found -1)))
+				End If
+				IF li_pos > 0 THEN
+					Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a No debe Hacer Menci$$HEX1$$f300$$ENDHEX$$n al Nombre del Usuario")
+					RETURN FALSE
+				END IF
+			Loop While li_found <> 0
+		ELSE
+			Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a No debe Hacer Menci$$HEX1$$f300$$ENDHEX$$n al Numero del Usuario")
+			RETURN FALSE
+		END IF
+	ELSE
+		Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a No debe Contener la Palabra PASSWORD")
+		RETURN FALSE
+	END IF
+ELSE
+	Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a No debe Contener la Palabra ARA")
+	RETURN FALSE
+END IF
+select count()
+into :li_npass
+from usr_pwd
+where num_usuario = :ai_usuario
+using atr_cnx;
+
+IF li_npass > 0 THEN
+	ldst_usrpwd = create DataStore
+	ldst_usrpwd.DataObject = 'd_usr_pwd'
+	ldst_usrpwd.SetTransObject(atr_cnx)
+	ldst_usrpwd.Retrieve( ai_usuario)
+
+	ll_found = ldst_usrpwd.Find( "pass = '" + upper(as_pass) + "'", 1, ldst_usrpwd.Rowcount())
+	ll_found2 = ldst_usrpwd.Find( "pass = '" + as_pass + "'", 1, ldst_usrpwd.Rowcount())
+	IF ll_found > 0 or ll_found2 > 0 Then
+		Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a debe Ser Diferente a las Ultimas 10 Utilizadas")
+		RETURN FALSE
+	End If
+END IF
+RETURN TRUE
+end function
+

@@ -1,0 +1,41 @@
+HA$PBExportHeader$gf_conexion_red.srf
+$PBExportComments$(LAC) Valida si se est$$HEX2$$e1002000$$ENDHEX$$conectado a la red
+global type gf_conexion_red from function_object
+end type
+
+forward prototypes
+global function boolean gf_conexion_red ()
+end prototypes
+
+global function boolean gf_conexion_red ();//------------------------------------------------------------------
+//  FUNCION/EVENTO	: gf_conexion_red
+//
+//  DESCRIPCION		: Funci$$HEX1$$f300$$ENDHEX$$n que determina si se est$$HEX2$$e1002000$$ENDHEX$$conectado a la red
+// 
+//  ARGUMENTOS			: 
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  12/ENE/06	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+integer SM_NETWORK = 63
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+
+IF GetSystemMetrics(SM_NETWORK) <= 0 THEN
+	return false
+else
+	return true
+end if
+
+end function
+

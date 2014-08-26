@@ -1,0 +1,87 @@
+HA$PBExportHeader$f_inserta_pwd_bit.srf
+global type f_inserta_pwd_bit from function_object
+end type
+
+forward prototypes
+global function boolean f_inserta_pwd_bit (long ai_usuario, string as_pass, string as_pass_ant, n_tr atr_cnx)
+end prototypes
+
+global function boolean f_inserta_pwd_bit (long ai_usuario, string as_pass, string as_pass_ant, n_tr atr_cnx);integer li_npass
+long ll_found, ll_found2
+date ld_fecha
+time lt_time
+string ls_ultimo_pass
+datetime ldt_fecha
+datastore ldst_usrpwd
+ldt_fecha = atr_cnx.of_fechaservidor()
+ld_fecha = date(ldt_fecha)
+lt_time = time(ldt_fecha)
+//f_fecha_hora_servidor(ld_fecha, lt_time)
+select count()
+into :li_npass
+from usr_pwd
+where num_usuario = :ai_usuario
+using atr_cnx;
+IF li_npass > 0 THEN
+	ldst_usrpwd = create DataStore
+	ldst_usrpwd.DataObject = 'd_usr_pwd'
+	ldst_usrpwd.SetTransObject(atr_cnx)
+	ldst_usrpwd.Retrieve( ai_usuario)
+
+	ll_found = ldst_usrpwd.Find( "pass = '" + upper(as_pass) + "'", 1, ldst_usrpwd.Rowcount())
+	ll_found2 = ldst_usrpwd.Find( "pass = '" + as_pass + "'", 1, ldst_usrpwd.Rowcount())
+	IF ll_found > 0 or ll_found2 > 0 Then
+		Messagebox("Contrase$$HEX1$$f100$$ENDHEX$$a Invalida","La Contrase$$HEX1$$f100$$ENDHEX$$a debe Ser Diferente a las Ultimas 10 Utilizadas")
+		RETURN FALSE
+	End If
+	IF li_npass = 10 Then
+		
+		SELECT pass
+		INTO :ls_ultimo_pass
+		FROM usr_pwd
+		WHERE num_usuario = :ai_usuario
+		ORDER BY fecha_cambio ASC
+		USING atr_cnx;
+		
+		UPDATE usr_pwd
+		SET 	pass = :as_pass_ant, 
+				fecha_cambio = :ld_fecha
+		WHERE 	pass = :ls_ultimo_pass AND
+					num_usuario = :ai_usuario
+		USING atr_cnx;
+		If atr_cnx.sqlcode = 0 Then
+			atr_cnx.of_commit()
+		else
+			atr_cnx.of_rollback()
+			Messagebox("Error", "Al Momento de Actualizar Bitacora de Password")
+			RETURN FALSE
+		End if
+	ELSE
+		INSERT INTO usr_pwd 
+					(num_usuario, pass, fecha_cambio)
+		VALUES 	(:ai_usuario, :as_pass_ant, :ld_fecha)
+		USING atr_cnx;
+		If atr_cnx.sqlcode = 0 Then
+			atr_cnx.of_commit()
+		else
+			atr_cnx.of_rollback()
+			Messagebox("Error", "Al Momento de Insertar Registro en la Bitacora de Password")
+			RETURN FALSE
+		End if
+	END IF
+ELSE
+	INSERT INTO usr_pwd 
+				(num_usuario, pass, fecha_cambio)
+	VALUES 	(:ai_usuario, :as_pass_ant, :ld_fecha)
+	USING atr_cnx;
+	If atr_cnx.sqlcode = 0 Then
+		atr_cnx.of_commit()
+	else
+		atr_cnx.of_rollback()
+		Messagebox("Error", "Al Momento de Insertar Registro en la Bitacora de Password")
+		RETURN FALSE
+	End if
+END IF
+return TRUE
+end function
+
