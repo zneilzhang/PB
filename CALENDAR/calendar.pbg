@@ -1,0 +1,12 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "CALENDAR\\calendar.pbl" "";
+@end;
+@begin Objects
+ "CALENDAR\\d_supercalendar.srd" "CALENDAR\\calendar.pbl";
+ "CALENDAR\\u_supercalendar.sru" "CALENDAR\\calendar.pbl";
+ "CALENDAR\\d_calendar_week.srd" "CALENDAR\\calendar.pbl";
+ "CALENDAR\\m_calendar_monthselection.srm" "CALENDAR\\calendar.pbl";
+ "CALENDAR\\n_cst_defaultsupercalendarmodel.sru" "CALENDAR\\calendar.pbl";
+ "CALENDAR\\n_cst_abstractsupercalendarmodel.sru" "CALENDAR\\calendar.pbl";
+@end;
