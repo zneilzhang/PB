@@ -1,0 +1,48 @@
+HA$PBExportHeader$f_fecha_mes.srf
+$PBExportComments$De acuerdo al datetime enviado, regresa cadena con dd/mmm/yyyy
+global type f_fecha_mes from function_object
+end type
+
+forward prototypes
+global function string f_fecha_mes (datetime ai_fecha)
+end prototypes
+
+global function string f_fecha_mes (datetime ai_fecha);String 	ls_fecha, ls_mes, ls_desc, ls_fecha_mes
+
+ls_fecha = String(ai_fecha, "dd/mm/yyyy")
+ls_mes   = mid(ls_fecha, 4, 2)
+
+CHOOSE CASE ls_mes
+	CASE '01'
+		ls_desc = 'Ene'
+	CASE '02'
+		ls_desc = 'Feb'
+	CASE '03'
+		ls_desc = 'Mar'
+	CASE '04'
+		ls_desc = 'Abr'
+	CASE '05'
+		ls_desc = 'May'
+	CASE '06'
+		ls_desc = 'Jun'
+	CASE '07'
+		ls_desc = 'Jul'
+	CASE '08'
+		ls_desc = 'Ago'
+	CASE '09'
+		ls_desc = 'Sep'
+	CASE '10'
+		ls_desc = 'Oct'
+	CASE '11'
+		ls_desc = 'Nov'
+	CASE '12'
+		ls_desc = 'Dic'
+END CHOOSE
+
+ls_fecha = String(ai_fecha, "dd/mm/yyyy")
+ls_fecha_mes = left(ls_fecha,3) + ls_desc + right(ls_fecha, 5)
+
+Return ls_fecha_mes
+
+end function
+

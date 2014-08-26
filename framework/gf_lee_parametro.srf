@@ -1,0 +1,94 @@
+HA$PBExportHeader$gf_lee_parametro.srf
+global type gf_lee_parametro from function_object
+end type
+
+forward prototypes
+global function any gf_lee_parametro (integer ai_id_parametro, string as_sitema)
+end prototypes
+
+global function any gf_lee_parametro (integer ai_id_parametro, string as_sitema);//------------------------------------------------------------------
+//  EVENTO/FUNCION	:	gf_lee_parametro
+//
+//  DESCRIPCION		:	Regresa el valor del parametro dado en la tabla 
+//								su_parametros_cia 							
+//
+//  EVENTO/ARGUMENTOS: 	ai_id_parametro es el id delparametro que se quiere buscar
+//								as_sitema ---> es el sistema en el que se esta trabajando
+//
+//  DEVUELVE			:  El dato contenido en el campo valor de la tabla su_parametros_cia
+//		 
+//		 NULL:		  cuando no encontro el parametro o cuando ocurrio un error
+//		 Algun Valor: cuando encontro el parametro regresa el valor asignado
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  16/DIC/03	MAG	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+integer li_tipo
+string ls_valor, ls_descripcion
+any lany_regreso
+blob lb_pic
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+//lany_regreso = ""
+//return lany_regreso
+//Primero determina el tipo del par$$HEX1$$e100$$ENDHEX$$metro
+SELECT tipo, descripcion
+INTO :li_tipo, :ls_descripcion
+FROM parametros_cia
+WHERE  id_parametro = :ai_id_parametro;
+		
+if sqlca.sqlcode <> 0 then
+	setnull(ls_valor)
+	return ls_valor
+end if
+
+if isnull(li_tipo) then 
+	messagebox(gs_nombreapp, "No se ha definido el Tipo de datos para el Par$$HEX1$$e100$$ENDHEX$$metro: '" + ls_descripcion + "',~rNo." + string(ai_id_parametro) + "~rFavor de contactar a Sistemas", exclamation!)
+	setnull(ls_valor)
+	return ls_valor
+end if
+
+//...si es imagen
+if li_tipo = 4 then
+	SELECTBLOB valor_binario
+	INTO :lb_pic
+	FROM parametro
+	WHERE id_parametro = :ai_id_parametro
+	USING sqlca;
+	
+	if isnull(lb_pic) then
+		messagebox(gs_nombreapp, "No se ha definido la imagen del Par$$HEX1$$e100$$ENDHEX$$metro: '" + ls_descripcion + "',~rNo." + string(ai_id_parametro) + "~rFavor de contactar a Sistemas", exclamation!)		
+		return lb_pic
+	else
+		lany_regreso = lb_pic
+	end if
+	
+else
+	SELECT valor
+	INTO :ls_valor
+	FROM parametros_cia
+	WHERE id_parametro = :ai_id_parametro;
+			
+	choose case li_tipo
+		case 1 //string
+			lany_regreso = ls_valor
+			
+		case 2 //num$$HEX1$$e900$$ENDHEX$$rico
+			lany_regreso = dec(ls_valor)
+			
+		case 3 //fecha
+			lany_regreso = date(ls_valor)
+			
+	end choose
+end if
+
+return lany_regreso		
+
+end function
+

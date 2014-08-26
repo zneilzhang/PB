@@ -1,0 +1,56 @@
+HA$PBExportHeader$gf_ajusta_logo.srf
+$PBExportComments$(LAC) Rutina para ajustar el objeto picture de la dw a las proporciones del archivo dado
+global type gf_ajusta_logo from function_object
+end type
+
+forward prototypes
+global function integer gf_ajusta_logo (datawindow adw_objeto, string as_nombre_objeto_imagen, string as_archivo_imagen)
+end prototypes
+
+global function integer gf_ajusta_logo (datawindow adw_objeto, string as_nombre_objeto_imagen, string as_archivo_imagen);//------------------------------------------------------------------
+//  MODULO/FUNCION	: gf_ajusta_logo
+//
+//  DESCRIPCION		: Funci$$HEX1$$f300$$ENDHEX$$n para ajustar el objeto picture
+// 							en base al archivo dado
+//
+//  EVENTO/ARGUMENTOS: 
+//
+//
+//  DEVUELVE			:
+//	  0   :  Si ok
+//  -1   :  Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  29/OCT/10	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------
+string	ls_regreso
+integer li_width, li_height
+dec{2} ldec2_proporcion_width
+
+//------------------------------------------
+//	CODIGO DE LA RUTINA
+//------------------------------------------
+//Valida si existe el archivo
+if not fileexists(as_archivo_imagen) then return -1
+
+//Ajusta logo
+ ls_regreso = gf_obtiene_ancho_alto_original(as_archivo_imagen)
+ li_width = integer(gf_desglosa_string(ls_regreso, 1, ","))
+ li_height = integer(gf_desglosa_string(ls_regreso, 2, ","))
+ 
+ if li_height = 0 then return -1
+ ldec2_proporcion_width = li_width / li_height
+ 
+//Cambia los logos
+adw_objeto.modify(as_nombre_objeto_imagen + ".filename = '" + as_archivo_imagen + "'")
+if adw_objeto.describe(as_nombre_objeto_imagen + ".tag") <> '1' then adw_objeto.modify(as_nombre_objeto_imagen + ".height = 200")
+li_width = integer(integer(adw_objeto.describe(as_nombre_objeto_imagen + ".height")) * ldec2_proporcion_width)
+adw_objeto.modify(as_nombre_objeto_imagen + ".width = " + string(li_width))
+
+return 0
+end function
+

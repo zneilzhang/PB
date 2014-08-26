@@ -1,0 +1,52 @@
+HA$PBExportHeader$gf_obtiene_ancho_alto_original.srf
+$PBExportComments$(LAC)
+global type gf_obtiene_ancho_alto_original from function_object
+end type
+
+forward prototypes
+global function string gf_obtiene_ancho_alto_original (string as_archivo_imagen)
+end prototypes
+
+global function string gf_obtiene_ancho_alto_original (string as_archivo_imagen);//------------------------------------------------------------------
+//  MODULO/FUNCION	: gf_obtiene_ancho_alto_original
+//
+//  DESCRIPCION		: Funci$$HEX1$$f300$$ENDHEX$$n para el ancho y alto original
+//					de la imagen del archivo dado
+//
+//  EVENTO/ARGUMENTOS: 
+//		as_archivo_imagen : Ruta y nombre del archivo
+//
+//  DEVUELVE			:
+//	 una cadena con el ancho y alto, ejemplo: 999,150
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  29/OCT/10	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------
+integer	li_width, li_height
+picture	lp_dummie
+
+//------------------------------------------
+//	CODIGO DE LA RUTINA
+//------------------------------------------
+if fileexists(as_archivo_imagen) then 
+
+	gw_frame.OpenUserObject ( lp_dummie, 20,20)
+	
+	lp_dummie.visible = false
+	lp_dummie.originalsize = true
+	lp_dummie.picturename = as_archivo_imagen
+	li_width = lp_dummie.width
+	li_height = lp_dummie.height
+	
+	//Destruye dummie
+	gw_frame.CloseUserObject ( lp_dummie ) 
+	
+end if
+
+return string(li_width) + "," + string(li_height)
+end function
+
