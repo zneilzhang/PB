@@ -1,0 +1,14 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "sca\\catalogos.pbl" "";
+@end;
+@begin Objects
+ "sca\\w_abc_afluencia.srw" "sca\\catalogos.pbl";
+ "sca\\d_brow_abc_afluencia.srd" "sca\\catalogos.pbl";
+ "sca\\w_abc_contactos.srw" "sca\\catalogos.pbl";
+ "sca\\d_brow_detalle_afluencia.srd" "sca\\catalogos.pbl";
+ "sca\\d_brow_detalle_contactos.srd" "sca\\catalogos.pbl";
+ "sca\\d_brow_contactos_grales.srd" "sca\\catalogos.pbl";
+ "sca\\d_brow_perfila_autoriza.srd" "sca\\catalogos.pbl";
+ "sca\\d_brow_abc_contactos.srd" "sca\\catalogos.pbl";
+@end;
