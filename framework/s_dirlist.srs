@@ -1,0 +1,12 @@
+HA$PBExportHeader$s_dirlist.srs
+global type s_dirlist from structure
+	string		s_filename
+	datetime		dt_filedate
+	longlong		ll_filesize
+	boolean		b_readonly
+	boolean		b_hidden
+	boolean		b_system
+	boolean		b_subdirectory
+	boolean		b_archive
+end type
+

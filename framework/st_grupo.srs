@@ -1,0 +1,12 @@
+HA$PBExportHeader$st_grupo.srs
+global type st_grupo from structure
+	integer		index
+	string		columna
+	string		nombre
+	string		compute
+	u_grupo		objeto
+	string		valores[]
+	string		filtro
+	string		tipodedato
+end type
+
