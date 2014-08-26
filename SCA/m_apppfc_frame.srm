@@ -1,0 +1,1977 @@
+HA$PBExportHeader$m_apppfc_frame.srm
+$PBExportComments$(LAC) Men$$HEX2$$fa002000$$ENDHEX$$default de la ventana principal de la aplicaci$$HEX1$$f300$$ENDHEX$$n
+forward
+global type m_apppfc_frame from m_apppfc_master
+end type
+type m_sep2 from menu within m_edit
+end type
+type m_exportar from menu within m_edit
+end type
+type m_sep3 from menu within m_edit
+end type
+type m_busqueda from menu within m_edit
+end type
+type m_edit from m_apppfc_master`m_edit within m_apppfc_frame
+m_sep2 m_sep2
+m_exportar m_exportar
+m_sep3 m_sep3
+m_busqueda m_busqueda
+end type
+type m_permisos from menu within m_tools
+end type
+type m_tools from m_apppfc_master`m_tools within m_apppfc_frame
+m_permisos m_permisos
+end type
+type m_sep1 from menu within m_window
+end type
+type m_cierraventanaactiva from menu within m_window
+end type
+type m_window from m_apppfc_master`m_window within m_apppfc_frame
+m_sep1 m_sep1
+m_cierraventanaactiva m_cierraventanaactiva
+end type
+type m_debug from menu within m_help
+end type
+type m_isql from menu within m_help
+end type
+type m_help from m_apppfc_master`m_help within m_apppfc_frame
+m_debug m_debug
+m_isql m_isql
+end type
+type m_afluencia from menu within m_apppfc_frame
+end type
+type m_abcafluencias from menu within m_afluencia
+end type
+type m_prueba from menu within m_afluencia
+end type
+type m_afluencia from menu within m_apppfc_frame
+m_abcafluencias m_abcafluencias
+m_prueba m_prueba
+end type
+type m_contactos from menu within m_apppfc_frame
+end type
+type m_abccontactos from menu within m_contactos
+end type
+type m_contactos from menu within m_apppfc_frame
+m_abccontactos m_abccontactos
+end type
+global type m_apppfc_frame from m_apppfc_master
+m_afluencia m_afluencia
+m_contactos m_contactos
+end type
+end forward
+
+global type m_apppfc_frame from m_apppfc_master
+m_afluencia m_afluencia
+m_contactos m_contactos
+end type
+global m_apppfc_frame m_apppfc_frame
+
+forward prototypes
+public function integer of_abrir (ref window aw_ventana, powerobject apo_object, menu am_menu)
+public function integer of_abrir (ref window aw_ventana, menu am_menu)
+end prototypes
+
+public function integer of_abrir (ref window aw_ventana, powerobject apo_object, menu am_menu);//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+boolean lb_visible
+string ls_imagen, ls_texto
+integer li_rtn
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+
+ls_texto = gnv_funciones_string.of_globalReplace(am_menu.text, '&','')
+
+lb_visible = gw_frame.uo_PowerDock.uo_powerdocktab.of_isVisible(aw_ventana)
+IF lb_visible THEN
+	gw_frame.uo_PowerDock.of_ActivateDocument(aw_ventana)
+ELSE
+	
+	ls_imagen = am_menu.menuimage
+	IF isnull(ls_imagen) OR len(trim(ls_imagen)) = 0 THEN ls_imagen = am_menu.ToolbarItemName
+	IF isnull(ls_imagen) OR len(trim(ls_imagen)) = 0 THEN ls_imagen = 'AppIcon!'
+	
+	IF NOT gw_frame.ib_multiplestab THEN gw_frame.uo_PowerDock.of_closeAllDocuments()
+
+	gw_frame.uo_PowerDock.of_OpenDocument(aw_ventana, apo_object, ls_texto, ls_imagen)
+	
+END IF
+
+RETURN 1
+
+
+end function
+
+public function integer of_abrir (ref window aw_ventana, menu am_menu);
+powerobject po
+
+RETURN of_abrir(aw_ventana, po, am_menu)
+
+
+end function
+
+on m_apppfc_frame.create
+m_apppfc_frame=this
+call super::create
+this.text = "m_apppfc_frame"
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+this.m_afluencia=create m_afluencia
+this.m_contactos=create m_contactos
+this.Item[UpperBound(this.Item)+1]=this.m_afluencia
+this.Item[UpperBound(this.Item)+1]=this.m_contactos
+end on
+
+on m_apppfc_frame.destroy
+call super::destroy
+destroy(this.m_afluencia)
+destroy(this.m_contactos)
+end on
+
+type m_file from m_apppfc_master`m_file within m_apppfc_frame
+end type
+
+on m_file.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_file.destroy
+call super::destroy
+end on
+
+type m_new from m_apppfc_master`m_new within m_file
+end type
+
+on m_new.create
+call super::create
+this.visible = false
+this.text = "&Nuevo..."
+this.shortcut = 0
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_new.destroy
+call super::destroy
+end on
+
+type m_open from m_apppfc_master`m_open within m_file
+end type
+
+on m_open.create
+call super::create
+this.visible = false
+this.text = "&Abrir..."
+this.shortcut = 0
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_open.destroy
+call super::destroy
+end on
+
+type m_close from m_apppfc_master`m_close within m_file
+end type
+
+on m_close.create
+call super::create
+this.visible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_close.destroy
+call super::destroy
+end on
+
+type m_dash11 from m_apppfc_master`m_dash11 within m_file
+end type
+
+on m_dash11.create
+call super::create
+this.visible = false
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash11.destroy
+call super::destroy
+end on
+
+type m_save from m_apppfc_master`m_save within m_file
+end type
+
+on m_save.create
+call super::create
+this.visible = false
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_save.destroy
+call super::destroy
+end on
+
+type m_saveas from m_apppfc_master`m_saveas within m_file
+end type
+
+on m_saveas.create
+call super::create
+this.visible = false
+this.toolbaritemname = "export5!"
+this.menuimage = "Export5!"
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_saveas.destroy
+call super::destroy
+end on
+
+type m_dash12 from m_apppfc_master`m_dash12 within m_file
+end type
+
+on m_dash12.create
+call super::create
+this.visible = false
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash12.destroy
+call super::destroy
+end on
+
+type m_print from m_apppfc_master`m_print within m_file
+end type
+
+on m_print.create
+call super::create
+this.visible = false
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_print.destroy
+call super::destroy
+end on
+
+type m_printpreview from m_apppfc_master`m_printpreview within m_file
+end type
+
+on m_printpreview.create
+call super::create
+this.visible = false
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_printpreview.destroy
+call super::destroy
+end on
+
+type m_pagesetup from m_apppfc_master`m_pagesetup within m_file
+end type
+
+on m_pagesetup.create
+call super::create
+this.enabled = false
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_pagesetup.destroy
+call super::destroy
+end on
+
+type m_printimmediate from m_apppfc_master`m_printimmediate within m_file
+end type
+
+on m_printimmediate.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_printimmediate.destroy
+call super::destroy
+end on
+
+type m_dash13 from m_apppfc_master`m_dash13 within m_file
+end type
+
+on m_dash13.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash13.destroy
+call super::destroy
+end on
+
+type m_delete from m_apppfc_master`m_delete within m_file
+end type
+
+on m_delete.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_delete.destroy
+call super::destroy
+end on
+
+type m_properties from m_apppfc_master`m_properties within m_file
+end type
+
+on m_properties.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_properties.destroy
+call super::destroy
+end on
+
+type m_dash14 from m_apppfc_master`m_dash14 within m_file
+end type
+
+on m_dash14.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash14.destroy
+call super::destroy
+end on
+
+type m_exit from m_apppfc_master`m_exit within m_file
+end type
+
+on m_exit.create
+call super::create
+this.toolbaritemvisible = true
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_exit.destroy
+call super::destroy
+end on
+
+type m_pfcmrudash1 from m_apppfc_master`m_pfcmrudash1 within m_file
+end type
+
+on m_pfcmrudash1.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_pfcmrudash1.destroy
+call super::destroy
+end on
+
+type m_pfcmru1 from m_apppfc_master`m_pfcmru1 within m_file
+end type
+
+on m_pfcmru1.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_pfcmru1.destroy
+call super::destroy
+end on
+
+type m_pfcmru2 from m_apppfc_master`m_pfcmru2 within m_file
+end type
+
+on m_pfcmru2.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_pfcmru2.destroy
+call super::destroy
+end on
+
+type m_pfcmru3 from m_apppfc_master`m_pfcmru3 within m_file
+end type
+
+on m_pfcmru3.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_pfcmru3.destroy
+call super::destroy
+end on
+
+type m_pfcmru4 from m_apppfc_master`m_pfcmru4 within m_file
+end type
+
+on m_pfcmru4.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_pfcmru4.destroy
+call super::destroy
+end on
+
+type m_pfcmru5 from m_apppfc_master`m_pfcmru5 within m_file
+end type
+
+on m_pfcmru5.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_pfcmru5.destroy
+call super::destroy
+end on
+
+type m_configurarimpresora from m_apppfc_master`m_configurarimpresora within m_file
+end type
+
+on m_configurarimpresora.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_configurarimpresora.destroy
+call super::destroy
+end on
+
+type m_edit from m_apppfc_master`m_edit within m_apppfc_frame
+m_sep2 m_sep2
+m_exportar m_exportar
+m_sep3 m_sep3
+m_busqueda m_busqueda
+end type
+
+on m_edit.create
+call super::create
+this.enabled = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+this.m_sep2=create m_sep2
+this.m_exportar=create m_exportar
+this.m_sep3=create m_sep3
+this.m_busqueda=create m_busqueda
+this.Item[UpperBound(this.Item)+1]=this.m_sep2
+this.Item[UpperBound(this.Item)+1]=this.m_exportar
+this.Item[UpperBound(this.Item)+1]=this.m_sep3
+this.Item[UpperBound(this.Item)+1]=this.m_busqueda
+end on
+
+on m_edit.destroy
+call super::destroy
+destroy(this.m_sep2)
+destroy(this.m_exportar)
+destroy(this.m_sep3)
+destroy(this.m_busqueda)
+end on
+
+type m_undo from m_apppfc_master`m_undo within m_edit
+end type
+
+on m_undo.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_undo.destroy
+call super::destroy
+end on
+
+type m_dash21 from m_apppfc_master`m_dash21 within m_edit
+end type
+
+on m_dash21.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash21.destroy
+call super::destroy
+end on
+
+type m_cut from m_apppfc_master`m_cut within m_edit
+end type
+
+on m_cut.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_cut.destroy
+call super::destroy
+end on
+
+type m_copy from m_apppfc_master`m_copy within m_edit
+end type
+
+on m_copy.create
+call super::create
+this.toolbaritemvisible = false
+this.menuimage = "copy!"
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_copy.destroy
+call super::destroy
+end on
+
+type m_paste from m_apppfc_master`m_paste within m_edit
+end type
+
+on m_paste.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_paste.destroy
+call super::destroy
+end on
+
+type m_pastespecial from m_apppfc_master`m_pastespecial within m_edit
+end type
+
+on m_pastespecial.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_pastespecial.destroy
+call super::destroy
+end on
+
+type m_clear from m_apppfc_master`m_clear within m_edit
+end type
+
+on m_clear.create
+call super::create
+this.visible = false
+this.text = "Bo&rrar"
+this.enabled = false
+this.shortcut = 0
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_clear.destroy
+call super::destroy
+end on
+
+type m_dash22 from m_apppfc_master`m_dash22 within m_edit
+end type
+
+on m_dash22.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash22.destroy
+call super::destroy
+end on
+
+type m_selectall from m_apppfc_master`m_selectall within m_edit
+end type
+
+on m_selectall.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_selectall.destroy
+call super::destroy
+end on
+
+type m_dash23 from m_apppfc_master`m_dash23 within m_edit
+end type
+
+on m_dash23.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash23.destroy
+call super::destroy
+end on
+
+type m_find from m_apppfc_master`m_find within m_edit
+end type
+
+on m_find.create
+call super::create
+this.toolbaritemvisible = false
+this.menuimage = "search!"
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_find.destroy
+call super::destroy
+end on
+
+type m_replace from m_apppfc_master`m_replace within m_edit
+end type
+
+on m_replace.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_replace.destroy
+call super::destroy
+end on
+
+type m_dash24 from m_apppfc_master`m_dash24 within m_edit
+end type
+
+on m_dash24.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash24.destroy
+call super::destroy
+end on
+
+type m_updatelinks from m_apppfc_master`m_updatelinks within m_edit
+end type
+
+on m_updatelinks.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_updatelinks.destroy
+call super::destroy
+end on
+
+type m_object1 from m_apppfc_master`m_object1 within m_edit
+end type
+
+on m_object1.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_object1.destroy
+call super::destroy
+end on
+
+type m_edit1 from m_apppfc_master`m_edit1 within m_object1
+end type
+
+on m_edit1.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_edit1.destroy
+call super::destroy
+end on
+
+type m_open1 from m_apppfc_master`m_open1 within m_object1
+end type
+
+on m_open1.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_open1.destroy
+call super::destroy
+end on
+
+type m_view from m_apppfc_master`m_view within m_apppfc_frame
+end type
+
+on m_view.create
+call super::create
+this.enabled = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_view.destroy
+call super::destroy
+end on
+
+type m_ruler from m_apppfc_master`m_ruler within m_view
+end type
+
+on m_ruler.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_ruler.destroy
+call super::destroy
+end on
+
+type m_dash31 from m_apppfc_master`m_dash31 within m_view
+end type
+
+on m_dash31.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash31.destroy
+call super::destroy
+end on
+
+type m_largeicon from m_apppfc_master`m_largeicon within m_view
+end type
+
+on m_largeicon.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_largeicon.destroy
+call super::destroy
+end on
+
+type m_smallicons from m_apppfc_master`m_smallicons within m_view
+end type
+
+on m_smallicons.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_smallicons.destroy
+call super::destroy
+end on
+
+type m_list from m_apppfc_master`m_list within m_view
+end type
+
+on m_list.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_list.destroy
+call super::destroy
+end on
+
+type m_details from m_apppfc_master`m_details within m_view
+end type
+
+on m_details.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_details.destroy
+call super::destroy
+end on
+
+type m_dash32 from m_apppfc_master`m_dash32 within m_view
+end type
+
+on m_dash32.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash32.destroy
+call super::destroy
+end on
+
+type m_arrangeicons from m_apppfc_master`m_arrangeicons within m_view
+end type
+
+on m_arrangeicons.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_arrangeicons.destroy
+call super::destroy
+end on
+
+type m_by1 from m_apppfc_master`m_by1 within m_arrangeicons
+end type
+
+on m_by1.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_by1.destroy
+call super::destroy
+end on
+
+type m_dash33 from m_apppfc_master`m_dash33 within m_arrangeicons
+end type
+
+on m_dash33.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash33.destroy
+call super::destroy
+end on
+
+type m_autoarrange from m_apppfc_master`m_autoarrange within m_arrangeicons
+end type
+
+on m_autoarrange.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_autoarrange.destroy
+call super::destroy
+end on
+
+type m_dash34 from m_apppfc_master`m_dash34 within m_view
+end type
+
+on m_dash34.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash34.destroy
+call super::destroy
+end on
+
+type m_first from m_apppfc_master`m_first within m_view
+end type
+
+on m_first.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_first.destroy
+call super::destroy
+end on
+
+type m_priorpage from m_apppfc_master`m_priorpage within m_view
+end type
+
+on m_priorpage.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_priorpage.destroy
+call super::destroy
+end on
+
+type m_nextpage from m_apppfc_master`m_nextpage within m_view
+end type
+
+on m_nextpage.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_nextpage.destroy
+call super::destroy
+end on
+
+type m_lastpage from m_apppfc_master`m_lastpage within m_view
+end type
+
+on m_lastpage.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_lastpage.destroy
+call super::destroy
+end on
+
+type m_dash35 from m_apppfc_master`m_dash35 within m_view
+end type
+
+on m_dash35.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash35.destroy
+call super::destroy
+end on
+
+type m_sort from m_apppfc_master`m_sort within m_view
+end type
+
+on m_sort.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_sort.destroy
+call super::destroy
+end on
+
+type m_filter from m_apppfc_master`m_filter within m_view
+end type
+
+on m_filter.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_filter.destroy
+call super::destroy
+end on
+
+type m_dash36 from m_apppfc_master`m_dash36 within m_view
+end type
+
+on m_dash36.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash36.destroy
+call super::destroy
+end on
+
+type m_zoom from m_apppfc_master`m_zoom within m_view
+end type
+
+on m_zoom.create
+call super::create
+this.toolbaritemvisible = false
+this.toolbaritemname = "preview!"
+this.toolbaritemtext = "Zoom"
+this.toolbaritemorder = 185
+this.toolbaritemspace = 1
+this.menuimage = "preview!"
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_zoom.destroy
+call super::destroy
+end on
+
+type m_insert from m_apppfc_master`m_insert within m_apppfc_frame
+end type
+
+on m_insert.create
+call super::create
+this.visible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_insert.destroy
+call super::destroy
+end on
+
+type m_insertfile from m_apppfc_master`m_insertfile within m_insert
+end type
+
+on m_insertfile.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_insertfile.destroy
+call super::destroy
+end on
+
+type m_picture from m_apppfc_master`m_picture within m_insert
+end type
+
+on m_picture.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_picture.destroy
+call super::destroy
+end on
+
+type m_dash41 from m_apppfc_master`m_dash41 within m_insert
+end type
+
+on m_dash41.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash41.destroy
+call super::destroy
+end on
+
+type m_object from m_apppfc_master`m_object within m_insert
+end type
+
+on m_object.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_object.destroy
+call super::destroy
+end on
+
+type m_tools from m_apppfc_master`m_tools within m_apppfc_frame
+m_permisos m_permisos
+end type
+
+on m_tools.create
+call super::create
+this.toolbaritemvisible = false
+this.toolbaritemname = "ico\tools16.ico"
+this.shifttoright = true
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+this.m_permisos=create m_permisos
+this.Item[UpperBound(this.Item)+1]=this.m_permisos
+end on
+
+on m_tools.destroy
+call super::destroy
+destroy(this.m_permisos)
+end on
+
+type m_toolbars from m_apppfc_master`m_toolbars within m_tools
+end type
+
+on m_toolbars.create
+call super::create
+this.visible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_toolbars.destroy
+call super::destroy
+end on
+
+type m_window from m_apppfc_master`m_window within m_apppfc_frame
+m_sep1 m_sep1
+m_cierraventanaactiva m_cierraventanaactiva
+end type
+
+on m_window.create
+call super::create
+this.visible = false
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+this.m_sep1=create m_sep1
+this.m_cierraventanaactiva=create m_cierraventanaactiva
+this.Item[UpperBound(this.Item)+1]=this.m_sep1
+this.Item[UpperBound(this.Item)+1]=this.m_cierraventanaactiva
+end on
+
+on m_window.destroy
+call super::destroy
+destroy(this.m_sep1)
+destroy(this.m_cierraventanaactiva)
+end on
+
+type m_cascade from m_apppfc_master`m_cascade within m_window
+end type
+
+on m_cascade.create
+call super::create
+this.menuimage = "cascade!"
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_cascade.destroy
+call super::destroy
+end on
+
+type m_tilehorizontal from m_apppfc_master`m_tilehorizontal within m_window
+end type
+
+on m_tilehorizontal.create
+call super::create
+this.menuimage = "horizontal!"
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_tilehorizontal.destroy
+call super::destroy
+end on
+
+type m_tilevertical from m_apppfc_master`m_tilevertical within m_window
+end type
+
+on m_tilevertical.create
+call super::create
+this.menuimage = "tile!"
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_tilevertical.destroy
+call super::destroy
+end on
+
+type m_layer from m_apppfc_master`m_layer within m_window
+end type
+
+on m_layer.create
+call super::create
+this.menuimage = "layer!"
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_layer.destroy
+call super::destroy
+end on
+
+type m_dash51 from m_apppfc_master`m_dash51 within m_window
+end type
+
+on m_dash51.create
+call super::create
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash51.destroy
+call super::destroy
+end on
+
+type m_minimizeall from m_apppfc_master`m_minimizeall within m_window
+end type
+
+on m_minimizeall.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_minimizeall.destroy
+call super::destroy
+end on
+
+type m_undoarrange from m_apppfc_master`m_undoarrange within m_window
+end type
+
+on m_undoarrange.create
+call super::create
+this.visible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_undoarrange.destroy
+call super::destroy
+end on
+
+type m_help from m_apppfc_master`m_help within m_apppfc_frame
+m_debug m_debug
+m_isql m_isql
+end type
+
+on m_help.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+this.m_debug=create m_debug
+this.m_isql=create m_isql
+this.Item[UpperBound(this.Item)+1]=this.m_debug
+this.Item[UpperBound(this.Item)+1]=this.m_isql
+end on
+
+on m_help.destroy
+call super::destroy
+destroy(this.m_debug)
+destroy(this.m_isql)
+end on
+
+type m_helptopics from m_apppfc_master`m_helptopics within m_help
+end type
+
+on m_helptopics.create
+call super::create
+this.visible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_helptopics.destroy
+call super::destroy
+end on
+
+type m_dash61 from m_apppfc_master`m_dash61 within m_help
+end type
+
+on m_dash61.create
+call super::create
+this.visible = false
+this.toolbaritemvisible = false
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_dash61.destroy
+call super::destroy
+end on
+
+type m_about from m_apppfc_master`m_about within m_help
+end type
+
+on m_about.create
+call super::create
+this.menubackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.toolbarbackcolor = 134217732
+this.bitmapgradient = false
+end on
+
+on m_about.destroy
+call super::destroy
+end on
+
+type m_sep2 from menu within m_edit
+end type
+
+on m_sep2.create
+call super::create
+this.text = "-"
+this.toolbaritemvisible = false
+this.shifttoright = true
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_sep2.destroy
+call super::destroy
+end on
+
+type m_exportar from menu within m_edit
+end type
+
+on m_exportar.create
+call super::create
+this.visible = false
+this.text = "Exportar"
+this.toolbaritemvisible = false
+this.toolbaritemname = "export5!"
+this.toolbaritemtext = "Exportar"
+this.shifttoright = true
+this.menuimage = "export5!"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_exportar.destroy
+call super::destroy
+end on
+
+event clicked;SetPointer (hourglass!)
+of_SendMessage ("pfc_saveas")
+//of_SendMessage ("ue_guardarcomo")
+end event
+
+type m_sep3 from menu within m_edit
+end type
+
+on m_sep3.create
+call super::create
+this.visible = false
+this.text = "-"
+this.toolbaritemvisible = false
+this.shifttoright = true
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_sep3.destroy
+call super::destroy
+end on
+
+type m_busqueda from menu within m_edit
+end type
+
+on m_busqueda.create
+call super::create
+this.visible = false
+this.text = "B$$HEX1$$fa00$$ENDHEX$$squeda...~tF1"
+this.shortcut = 112
+this.microhelp = "B$$HEX1$$fa00$$ENDHEX$$squeda de datos disponibles"
+this.toolbaritemvisible = false
+this.toolbaritemname = "addwatch5!"
+this.toolbaritemtext = "B$$HEX1$$fa00$$ENDHEX$$squeda de datos disponibles"
+this.shifttoright = true
+this.menuimage = "addwatch5!"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_busqueda.destroy
+call super::destroy
+end on
+
+event clicked;of_sendmessage("ue_busqueda")
+end event
+
+type m_permisos from menu within m_tools
+end type
+
+on m_permisos.create
+call super::create
+this.text = "Permisos de acceso"
+this.shifttoright = true
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_permisos.destroy
+call super::destroy
+end on
+
+event clicked;
+//Open(w_permisos_menu)
+of_Abrir(w_permisos, this)
+end event
+
+type m_sep1 from menu within m_window
+end type
+
+on m_sep1.create
+call super::create
+this.visible = false
+this.text = "-"
+this.toolbaritemvisible = false
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_sep1.destroy
+call super::destroy
+end on
+
+type m_cierraventanaactiva from menu within m_window
+end type
+
+event clicked;of_SendMessage ("pfc_close")
+end event
+
+on m_cierraventanaactiva.create
+call super::create
+this.visible = false
+this.text = "Cierra ventana activa~tCtrl+F4"
+this.shortcut = 371
+this.toolbaritemvisible = false
+this.toolbaritemname = "close!"
+this.toolbaritemtext = "Cierra ventana activa"
+this.toolbaritemorder = 8888
+this.toolbaritemspace = 1
+this.menuimage = "close!"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_cierraventanaactiva.destroy
+call super::destroy
+end on
+
+type m_debug from menu within m_help
+end type
+
+event clicked;gnv_app.of_SetDebug(TRUE)
+gnv_app.inv_debug.of_SetSQLSpy(TRUE)
+gnv_app.inv_debug.of_OpenLog(TRUE)
+gnv_app.inv_debug.inv_sqlspy.of_OpenSQLSpy(TRUE)
+gnv_app.inv_debug.of_SetDWProperty(TRUE)
+gnv_app.inv_debug.of_SetAlwaysOnTop (TRUE)
+end event
+
+on m_debug.create
+call super::create
+this.visible = false
+this.text = "Debug~tCtrl+Shift+F9"
+this.shortcut = 1400
+this.toolbaritemvisible = false
+this.shifttoright = true
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_debug.destroy
+call super::destroy
+end on
+
+type m_isql from menu within m_help
+end type
+
+event clicked;open(w_isql)
+end event
+
+on m_isql.create
+call super::create
+this.visible = false
+this.text = "ISQL~tCtrl+Shift+L"
+this.shortcut = 1356
+this.toolbaritemvisible = false
+this.shifttoright = true
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_isql.destroy
+call super::destroy
+end on
+
+type m_afluencia from menu within m_apppfc_frame
+m_abcafluencias m_abcafluencias
+m_prueba m_prueba
+end type
+
+on m_afluencia.create
+call super::create
+this.text = "Afluencia"
+this.toolbaritemvisible = false
+this.toolbaritemname = "D:\EnKontrol\RUBA\SCA\ico\AssignCase.ico"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.m_abcafluencias=create m_abcafluencias
+this.m_prueba=create m_prueba
+this.Item[UpperBound(this.Item)+1]=this.m_abcafluencias
+this.Item[UpperBound(this.Item)+1]=this.m_prueba
+end on
+
+on m_afluencia.destroy
+call super::destroy
+destroy(this.m_abcafluencias)
+destroy(this.m_prueba)
+end on
+
+type m_abcafluencias from menu within m_afluencia
+end type
+
+on m_abcafluencias.create
+call super::create
+this.text = "ABC Afluencias"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_abcafluencias.destroy
+call super::destroy
+end on
+
+event clicked;of_Abrir(w_abc_afluencia, this)
+end event
+
+type m_prueba from menu within m_afluencia
+end type
+
+event clicked;of_Abrir(w_main_calendarexample, this)
+end event
+
+on m_prueba.create
+call super::create
+this.text = "prueba"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_prueba.destroy
+call super::destroy
+end on
+
+type m_contactos from menu within m_apppfc_frame
+m_abccontactos m_abccontactos
+end type
+
+on m_contactos.create
+call super::create
+this.text = "Contactos"
+this.toolbaritemvisible = false
+this.toolbaritemname = "D:\EnKontrol\RUBA\SCA\ico\addcte.ico"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.m_abccontactos=create m_abccontactos
+this.Item[UpperBound(this.Item)+1]=this.m_abccontactos
+end on
+
+on m_contactos.destroy
+call super::destroy
+destroy(this.m_abccontactos)
+end on
+
+type m_abccontactos from menu within m_contactos
+end type
+
+event clicked;
+of_Abrir(w_abc_contactos, this)
+end event
+
+on m_abccontactos.create
+call super::create
+this.text = "ABC Contactos"
+this.menustyle = contemporarymenu!
+this.menutextcolor = 134217735
+this.menubackcolor = 67108864
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 67108864
+this.bitmapbackcolor = 134217728
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbarstyle = contemporarytoolbar!
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 134217732
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+end on
+
+on m_abccontactos.destroy
+call super::destroy
+end on
+

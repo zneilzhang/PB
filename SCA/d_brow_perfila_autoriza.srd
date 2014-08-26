@@ -1,0 +1,163 @@
+HA$PBExportHeader$d_brow_perfila_autoriza.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=1024 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes name=numcte dbname="sca_contactos.numcte" )
+ column=(type=char(30) updatewhereclause=yes name=sca_contactos_nom_cte dbname="sca_contactos.nom_cte" )
+ column=(type=char(30) updatewhereclause=yes name=sca_contactos_ap_paterno_cte dbname="sca_contactos.ap_paterno_cte" )
+ column=(type=char(30) updatewhereclause=yes name=sca_contactos_ap_materno_cte dbname="sca_contactos.ap_materno_cte" )
+ column=(type=date updatewhereclause=yes name=sca_contactos_fec_registro dbname="sca_contactos.fec_registro" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_empleado dbname="sca_contactos.empleado" )
+ column=(type=char(92) updatewhereclause=yes name=nom_agente dbname="nom_agente" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_id_punto_venta dbname="sca_contactos.id_punto_venta" )
+ column=(type=char(50) updatewhereclause=yes name=nom_punto_vta dbname="nom_punto_vta" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_interes dbname="sca_contactos.interes" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_sexo dbname="sca_contactos.sexo" )
+ column=(type=char(20) updatewhereclause=yes name=sca_contactos_tel_casa dbname="sca_contactos.tel_casa" )
+ column=(type=char(20) updatewhereclause=yes name=sca_contactos_tel_oficina dbname="sca_contactos.tel_oficina" )
+ column=(type=char(20) updatewhereclause=yes name=sca_contactos_tel_celular dbname="sca_contactos.tel_celular" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=reune_puntuacion dbname="sca_contactos.reune_puntuacion" initial="N" values="Si	S/No	N/" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=year_puntuacion dbname="sca_contactos.year_puntuacion" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=mes_puntuacion dbname="sca_contactos.mes_puntuacion" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=encargado dbname="sca_contactos.encargado" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=valida_informacion dbname="sca_contactos.valida_informacion" initial="N" values="Si	S/No	N/" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=incidencia dbname="sca_contactos.incidencia" initial="N" values="Si	S/No	N/" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=id_incidencia dbname="sca_contactos.id_incidencia" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=comentario dbname="sca_contactos.comentario" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_id_estrategia dbname="sca_contactos.id_estrategia" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_id_empresa dbname="sca_contactos.id_empresa" )
+ column=(type=char(80) updatewhereclause=yes name=nombre_empresa dbname="nombre_empresa" )
+ column=(type=char(30) updatewhereclause=yes name=sca_contactos_puesto dbname="sca_contactos.puesto" )
+ column=(type=char(30) updatewhereclause=yes name=sca_contactos_calle dbname="sca_contactos.calle" )
+ column=(type=char(10) updatewhereclause=yes name=sca_contactos_numero dbname="sca_contactos.numero" )
+ column=(type=char(10) updatewhereclause=yes name=sca_contactos_interior dbname="sca_contactos.interior" )
+ column=(type=char(5) updatewhereclause=yes name=sca_contactos_cp dbname="sca_contactos.cp" )
+ column=(type=char(30) updatewhereclause=yes name=sca_contactos_colonia dbname="sca_contactos.colonia" )
+ column=(type=char(40) updatewhereclause=yes name=sca_contactos_ciudad dbname="sca_contactos.ciudad" )
+ column=(type=char(40) updatewhereclause=yes name=sca_contactos_municipio dbname="sca_contactos.municipio" )
+ column=(type=char(40) updatewhereclause=yes name=sca_contactos_estado dbname="sca_contactos.estado" )
+ column=(type=char(10) updatewhereclause=yes name=sca_contactos_imss dbname="sca_contactos.imss" )
+ column=(type=date updatewhereclause=yes name=sca_contactos_fecha_nacimiento dbname="sca_contactos.fecha_nacimiento" )
+ column=(type=char(13) updatewhereclause=yes name=sca_contactos_rfc dbname="sca_contactos.rfc" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_id_num_relacion_probable dbname="sca_contactos.id_num_relacion_probable" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_recomienda dbname="sca_contactos.recomienda" )
+ column=(type=char(35) updatewhereclause=yes name=sca_contactos_referencia1 dbname="sca_contactos.referencia1" )
+ column=(type=char(35) updatewhereclause=yes name=sca_contactos_referencia2 dbname="sca_contactos.referencia2" )
+ column=(type=char(10) updatewhereclause=yes name=sca_contactos_tel_ref1 dbname="sca_contactos.tel_ref1" )
+ column=(type=char(10) updatewhereclause=yes name=sca_contactos_tel_ref2 dbname="sca_contactos.tel_ref2" )
+ column=(type=char(20) updatewhereclause=yes name=sca_contactos_parentesco_ref1 dbname="sca_contactos.parentesco_ref1" )
+ column=(type=char(20) updatewhereclause=yes name=sca_contactos_parentesco_ref2 dbname="sca_contactos.parentesco_ref2" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_reune_puntuacion dbname="sca_contactos.reune_puntuacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_year_puntuacion dbname="sca_contactos.year_puntuacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_mes_puntuacion dbname="sca_contactos.mes_puntuacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_encargado dbname="sca_contactos.encargado" )
+ column=(type=char(92) updatewhereclause=yes name=nom_empleado dbname="nom_empleado" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_valida_informacion dbname="sca_contactos.valida_informacion" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_incidencia dbname="sca_contactos.incidencia" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_id_incidencia dbname="sca_contactos.id_incidencia" )
+ column=(type=char(100) updatewhereclause=yes name=sca_contactos_comentario dbname="sca_contactos.comentario" )
+ retrieve="  SELECT ~"sca_contactos~".~"numcte~",   
+         ~"sca_contactos~".~"nom_cte~",   
+         ~"sca_contactos~".~"ap_paterno_cte~",   
+         ~"sca_contactos~".~"ap_materno_cte~",   
+         ~"sca_contactos~".~"fec_registro~",   
+         ~"sca_contactos~".~"empleado~",   
+		nom_agente = sm_agente.nom_empleado + ' '+ sm_agente.ap_paterno_empleado + ' '+sm_agente.ap_materno_empleado,
+         ~"sca_contactos~".~"id_punto_venta~",   
+		nom_punto_vta = descripcion_pv,
+         ~"sca_contactos~".~"interes~",   
+         ~"sca_contactos~".~"sexo~",   
+         ~"sca_contactos~".~"tel_casa~",   
+         ~"sca_contactos~".~"tel_oficina~",   
+         ~"sca_contactos~".~"tel_celular~",    
+         ~"sca_contactos~".~"reune_puntuacion~",   
+         ~"sca_contactos~".~"year_puntuacion~",   
+         ~"sca_contactos~".~"mes_puntuacion~",   
+         ~"sca_contactos~".~"encargado~",   
+         ~"sca_contactos~".~"valida_informacion~",   
+         ~"sca_contactos~".~"incidencia~",   
+         ~"sca_contactos~".~"id_incidencia~",   
+         ~"sca_contactos~".~"comentario~",
+		sca_contactos.id_estrategia , 
+
+		~"sca_contactos~".~"id_empresa~",   
+		nombre_empresa = sm_empresa.nombre_empresa,
+         ~"sca_contactos~".~"puesto~",   
+         ~"sca_contactos~".~"calle~",   
+         ~"sca_contactos~".~"numero~",   
+         ~"sca_contactos~".~"interior~",   
+         ~"sca_contactos~".~"cp~",   
+         ~"sca_contactos~".~"colonia~",   
+         ~"sca_contactos~".~"ciudad~",   
+         ~"sca_contactos~".~"municipio~",
+		sca_contactos.estado,   
+         ~"sca_contactos~".~"imss~",   
+         ~"sca_contactos~".~"fecha_nacimiento~",   
+         ~"sca_contactos~".~"rfc~",   
+         ~"sca_contactos~".~"id_num_relacion_probable~",   
+         ~"sca_contactos~".~"recomienda~",   
+         ~"sca_contactos~".~"referencia1~",   
+         ~"sca_contactos~".~"referencia2~",   
+         ~"sca_contactos~".~"tel_ref1~",   
+         ~"sca_contactos~".~"tel_ref2~",   
+         ~"sca_contactos~".~"parentesco_ref1~",   
+         ~"sca_contactos~".~"parentesco_ref2~"	,
+ 
+         ~"sca_contactos~".~"reune_puntuacion~",   
+         ~"sca_contactos~".~"year_puntuacion~",   
+         ~"sca_contactos~".~"mes_puntuacion~",   
+         ~"sca_contactos~".~"encargado~",   
+		nom_empleado = sma.nom_empleado + ' ' +sma.ap_paterno_empleado+' '+sma.ap_materno_empleado,
+         ~"sca_contactos~".~"valida_informacion~",   
+         ~"sca_contactos~".~"incidencia~",   
+         ~"sca_contactos~".~"id_incidencia~",   
+         ~"sca_contactos~".~"comentario~"  
+
+    FROM ~"sca_contactos~"  left outer join  sm_agente
+						on sca_contactos.empleado =  sm_agente.empleado 
+					left outer join sm_agente sma
+						on sca_contactos.encargado =  sma.empleado 
+					left outer join sm_punto_venta
+						on sca_contactos.id_punto_venta = sm_punto_venta.id_punto_venta
+					left outer join sm_empresa
+								on sca_contactos.id_empresa = sm_empresa.id_empresa		
+
+
+	where sca_contactos.numcte = :an_numcte
+" arguments=(("an_numcte", number)) )
+groupbox(band=detail text="Datos para Perfilar"border="5" color="33554432" x="37" y="4" height="336" width="2857"  name=gb_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+groupbox(band=detail text="Autorizacion"border="5" color="33554432" x="37" y="348" height="648" width="2862"  name=gb_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="$$HEX1$$bf00$$ENDHEX$$Reune Puntuacion:?" border="0" color="33554432" x="32" y="140" height="56" width="585" html.valueishtml="0"  name=reune_puntuacion_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Mes:" border="0" color="33554432" x="1024" y="136" height="56" width="288" html.valueishtml="0"  name=mes_puntuacion_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="A$$HEX1$$f100$$ENDHEX$$o:" border="0" color="33554432" x="1554" y="140" height="56" width="133" html.valueishtml="0"  name=year_puntuacion_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=15 alignment="0" tabsequence=10 border="0" color="33554432" x="635" y="140" height="64" width="343" format="[general]" html.valueishtml="0"  name=reune_puntuacion visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="1" text="Comentario:" border="0" color="33554432" x="37" y="804" height="56" width="512" html.valueishtml="0"  name=comentario_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=22 alignment="0" tabsequence=80 border="5" color="33554432" x="567" y="804" height="64" width="2208" format="[general]" html.valueishtml="0"  name=comentario visible="1" edit.limit=100 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Incidencia:" border="0" color="33554432" x="50" y="668" height="56" width="512" html.valueishtml="0"  name=incidencia_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=20 alignment="0" tabsequence=60 border="0" color="33554432" x="581" y="668" height="64" width="343" format="[general]" html.valueishtml="0"  name=incidencia visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="1" text="Id Incidencia:" border="0" color="33554432" x="960" y="668" height="56" width="512" html.valueishtml="0"  name=id_incidencia_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="1" tabsequence=70 border="5" color="33554432" x="1490" y="668" height="64" width="197" format="[general]" html.valueishtml="0"  name=id_incidencia visible="1" editmask.mask="###" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Enc. Punto venta:" border="0" color="33554432" x="78" y="492" height="56" width="512" html.valueishtml="0"  name=encargado_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=18 alignment="1" tabsequence=40 border="5" color="33554432" x="608" y="492" height="64" width="215" format="[general]" html.valueishtml="0"  name=encargado visible="1" editmask.mask="####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=50 alignment="0" tabsequence=32766 border="5" color="33554432" x="855" y="492" height="64" width="869" format="[general]" html.valueishtml="0"  name=nom_empleado visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="1" text="$$HEX1$$bf00$$ENDHEX$$Validada la Informacion:?" border="0" color="33554432" x="1682" y="492" height="56" width="763" html.valueishtml="0"  name=valida_informacion_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=19 alignment="0" tabsequence=50 border="0" color="33554432" x="2464" y="492" height="64" width="343" format="[general]" html.valueishtml="0"  name=valida_informacion visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=detail text="Genera Prospecto" enabled=yes action="0" border="0" color="33554432" x="1102" y="880" height="100" width="503" vtextalign="0" htextalign="0"  name=b_genera visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=detail text="Mandar Validar" enabled=yes action="0" border="0" color="33554432" x="1957" y="116" height="100" width="453" vtextalign="0" htextalign="0"  name=b_validar visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+button(band=detail text="Validado" enabled=yes action="0" border="0" color="33554432" x="1957" y="632" height="100" width="434" vtextalign="0" htextalign="0"  name=b_validado visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=17 alignment="2" tabsequence=30 border="5" color="33554432" x="1330" y="140" height="64" width="183" format="[general]" html.valueishtml="0"  name=mes_puntuacion visible="1" editmask.mask="##" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=16 alignment="2" tabsequence=20 border="5" color="33554432" x="1705" y="140" height="64" width="183" format="[general]" html.valueishtml="0"  name=year_puntuacion visible="1" editmask.mask="####" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

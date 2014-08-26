@@ -1,0 +1,151 @@
+HA$PBExportHeader$d_brow_abc_afluencia.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=1012 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=numcte dbname="sca_afluencia.numcte" dbalias="sa.numcte" )
+ column=(type=date update=yes updatewhereclause=yes name=fecha_registro dbname="sca_afluencia.fecha_registro" dbalias="sa.fecha_registro" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=nom_cte dbname="sca_afluencia.nom_cte" dbalias="sa.nom_cte" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=ap_paterno_cte dbname="sca_afluencia.ap_paterno_cte" dbalias="sa.ap_paterno_cte" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=ap_materno_cte dbname="sca_afluencia.ap_materno_cte" dbalias="sa.ap_materno_cte" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=sexo dbname="sca_afluencia.sexo" dbalias="sa.sexo" initial="F" values="Femenino	F/Masculino	M/" )
+ column=(type=decimal(0) updatewhereclause=yes name=id_motivo_visita dbname="sca_afluencia.id_motivo_visita" dbalias="sa.id_motivo_visita" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=id_punto_venta dbname="sca_afluencia.id_punto_venta" dbalias="sa.id_punto_venta" )
+ column=(type=char(50) updatewhereclause=yes name=descripcion_pv dbname="sm_punto_venta.descripcion_pv" dbalias="sp.descripcion_pv" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=id_num_canal dbname="sca_afluencia.id_num_canal" dbalias="sa.id_num_canal" )
+ column=(type=char(100) updatewhereclause=yes name=nom_canal dbname="sm_mediopublicidad_canal.nom_canal" dbalias="sm.nom_canal" )
+ column=(type=long update=yes updatewhereclause=yes name=ind_primera_vez dbname="sca_afluencia.ind_primera_vez" dbalias="sa.ind_primera_vez" initial="S" values="No	0/Si	1/" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=empleado dbname="sca_afluencia.empleado" dbalias="sa.empleado" )
+ column=(type=char(92) updatewhereclause=yes name=nombre_empleado dbname="nombre_empleado" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=encargado dbname="sca_afluencia.encargado" dbalias="sa.encargado" )
+ column=(type=char(92) updatewhereclause=yes name=nombre_encargado dbname="nombre_encargado" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=lada dbname="sca_afluencia.lada" dbalias="sa.lada" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=tel_casa dbname="sca_afluencia.tel_casa" dbalias="sa.tel_casa" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=tel_oficina dbname="sca_afluencia.tel_oficina" dbalias="sa.tel_oficina" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=tel_celular dbname="sca_afluencia.tel_celular" dbalias="sa.tel_celular" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=dir_email dbname="sca_afluencia.dir_email" dbalias="sa.dir_email" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=empresa dbname="sca_afluencia.empresa" dbalias="sa.empresa" )
+ column=(type=char(50) update=yes updatewhereclause=yes name=ocupacion dbname="sca_afluencia.ocupacion" dbalias="sa.ocupacion" )
+ column=(type=char(60) update=yes updatewhereclause=yes name=dir_casa dbname="sca_afluencia.dir_casa" dbalias="sa.dir_casa" )
+ column=(type=char(7) update=yes updatewhereclause=yes name=num_ext dbname="sca_afluencia.num_ext" dbalias="sa.num_ext" )
+ column=(type=char(7) update=yes updatewhereclause=yes name=num_int dbname="sca_afluencia.num_int" dbalias="sa.num_int" )
+ column=(type=char(6) update=yes updatewhereclause=yes name=cp dbname="sca_afluencia.cp" dbalias="sa.cp" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=colonia dbname="sca_afluencia.colonia" dbalias="sa.colonia" )
+ column=(type=char(25) update=yes updatewhereclause=yes name=ciudad dbname="sca_afluencia.ciudad" dbalias="sa.ciudad" )
+ column=(type=char(100) update=yes updatewhereclause=yes name=municipio dbname="sca_afluencia.municipio" dbalias="sa.municipio" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=edo dbname="sca_afluencia.edo" dbalias="sa.edo" )
+ column=(type=char(15) update=yes updatewhereclause=yes name=pais dbname="sca_afluencia.pais" dbalias="sa.pais" )
+ column=(type=char(13) update=yes updatewhereclause=yes name=afiliacion_immss dbname="sca_afluencia.afiliacion_immss" dbalias="sa.afiliacion_immss" )
+ column=(type=char(14) update=yes updatewhereclause=yes name=rfc_cte dbname="sca_afluencia.rfc_cte" dbalias="sa.rfc_cte" )
+ column=(type=date update=yes updatewhereclause=yes name=fecha_nac dbname="sca_afluencia.fecha_nac" dbalias="sa.fecha_nac" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ind_esquema_probable dbname="sca_afluencia.ind_esquema_probable" dbalias="sa.ind_esquema_probable" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=ind_recomendado dbname="sca_afluencia.ind_recomendado" dbalias="sa.ind_recomendado" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=status_cte dbname="sca_afluencia.status_cte" dbalias="sa.status_cte" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=num_grado_interes dbname="sca_afluencia.num_grado_interes" dbalias="sa.num_grado_interes" )
+ column=(type=date update=yes updatewhereclause=yes name=fecha_ult_visita dbname="sca_afluencia.fecha_ult_visita" dbalias="sa.fecha_ult_visita" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=numero_visita dbname="sca_afluencia.numero_visita" dbalias="sa.numero_visita" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=usuario_modifica dbname="sca_afluencia.usuario_modifica" dbalias="sa.usuario_modifica" )
+ column=(type=datetime update=yes updatewhereclause=yes name=fecha_movimiento dbname="sca_afluencia.fecha_movimiento" dbalias="sa.fecha_movimiento" )
+ retrieve="SELECT	sa.numcte,
+			sa.fecha_registro,
+			sa.nom_cte,
+			sa.ap_paterno_cte,
+			sa.ap_materno_cte,
+			sa.sexo,
+			sa.id_motivo_visita,
+			sa.id_punto_venta,
+			sp.descripcion_pv,
+			sa.id_num_canal,
+			sm.nom_canal,   
+			sa.ind_primera_vez,
+			sa.empleado,
+			nombre_empleado = sag.nom_empleado +' '+ sag.ap_paterno_empleado +' '+ sag.ap_materno_empleado,
+			sa.encargado,
+			nombre_encargado = sag2.nom_empleado +' '+ sag2.ap_paterno_empleado +' '+ sag2.ap_materno_empleado,
+			sa.lada,
+			sa.tel_casa,
+			sa.tel_oficina,
+			sa.tel_celular,
+			sa.dir_email	,
+			sa.empresa,
+			sa.ocupacion,
+			sa.dir_casa,
+			sa.num_ext,
+			sa.num_int,
+			sa.cp,
+			sa.colonia,
+			sa.ciudad,
+			sa.municipio,
+			sa.edo,
+			sa.pais,
+			sa.afiliacion_immss,
+			sa.rfc_cte,
+			sa.fecha_nac,
+			sa.ind_esquema_probable,
+			sa.ind_recomendado,
+			sa.status_cte,
+			sa.num_grado_interes,
+			sa.fecha_ult_visita,
+			sa.numero_visita,
+			sa.usuario_modifica,
+			sa.fecha_movimiento
+	FROM	sca_afluencia sa	LEFT OUTER JOIN	sm_punto_venta sp ON	sp.id_punto_venta = sa.id_punto_venta
+									LEFT OUTER JOIN sm_mediopublicidad_canal sm ON	sa.id_num_canal = sm.id_num_canal
+									LEFT OUTER JOIN sm_agente sag ON sa.empleado = sag.empleado
+									LEFT OUTER JOIN sm_agente sag2 ON sa.encargado = sag2.empleado
+	WHERE	sa.numcte = :ai_numcte
+" update="sca_afluencia" updatewhere=1 updatekeyinplace=yes arguments=(("ai_numcte", number)) )
+groupbox(band=detail text="Tel$$HEX1$$e900$$ENDHEX$$fonos"border="5" color="33554432" x="96" y="788" height="188" width="3323"  name=gb_1 visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+groupbox(band=detail text="Datos Generales"border="5" color="33554432" x="41" y="200" height="796" width="3406"  name=gb_2 visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=6 alignment="0" tabsequence=50 border="0" color="33554432" x="475" y="248" height="60" width="617" format="[general]" html.valueishtml="0"  name=sexo visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="Ap Paterno:" border="0" color="33554432" x="631" y="56" height="56" width="370" html.valueishtml="0"  name=sm_cliente_ap_paterno_cte_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Genero:" border="0" color="33554432" x="55" y="252" height="52" width="402" html.valueishtml="0"  name=ubicacion_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="$$HEX1$$bf00$$ENDHEX$$C$$HEX1$$f300$$ENDHEX$$mo se entero de Nosotros?" border="0" color="33554432" x="55" y="360" height="52" width="672" html.valueishtml="0"  name=sm_cliente_fecha_ubicacion_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="$$HEX1$$bf00$$ENDHEX$$A qui$$HEX1$$e900$$ENDHEX$$n se se le asigna?" border="0" color="33554432" x="1856" y="368" height="52" width="544" html.valueishtml="0"  name=seguimiento_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Email:" border="0" color="33554432" x="2149" y="600" height="52" width="160" html.valueishtml="0"  name=sm_cliente_rfc_cte_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Lada:" border="0" color="33554432" x="206" y="868" height="52" width="178" html.valueishtml="0"  name=sm_cliente_fec_registo_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=17 alignment="0" tabsequence=130 border="5" color="33554432" x="407" y="868" height="56" width="96" format="[general]" html.valueishtml="0"  name=lada visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Casa:" border="0" color="33554432" x="736" y="868" height="52" width="242" html.valueishtml="0"  name=sm_cliente_lote_id_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Empresa:" border="0" color="33554432" x="2583" y="868" height="52" width="242" html.valueishtml="0"  name=sm_cliente_bit_exp_rechazado_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=21 alignment="0" tabsequence=120 border="5" color="33554432" x="2331" y="600" height="56" width="960" format="[general]" html.valueishtml="0"  name=dir_email visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=14 alignment="0" tabsequence=180 border="5" color="33554432" x="2583" y="364" height="52" width="709" format="[general]" html.valueishtml="0"  name=nombre_empleado visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=9 alignment="0" tabsequence=32766 border="5" color="33554432" x="2583" y="248" height="56" width="709" format="[general]" html.valueishtml="0"  name=descripcion_pv visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="Punto Venta:" border="0" color="33554432" x="2080" y="248" height="52" width="315" html.valueishtml="0"  name=t_3 visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=8 alignment="0" tabsequence=70 border="5" color="33554432" x="2427" y="248" height="56" width="137" format="[general]" html.valueishtml="0"  name=id_punto_venta visible="1" editmask.mask="###" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Motivo Visita:" border="0" color="33554432" x="1166" y="248" height="52" width="306" html.valueishtml="0"  name=t_2 visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=7 alignment="0" tabsequence=60 border="5" color="33554432" x="1495" y="248" height="56" width="137" format="[general]" html.valueishtml="0"  name=id_motivo_visita visible="1" editmask.mask="###" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=12 alignment="0" tabsequence=100 border="0" color="33554432" x="750" y="484" height="56" width="402" format="[general]" html.valueishtml="0"  name=ind_primera_vez visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="1" text="$$HEX1$$bf00$$ENDHEX$$Visita Primera Vez?" border="0" color="33554432" x="137" y="484" height="52" width="590" html.valueishtml="0"  name=t_4 visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Enc. Punto Venta:" border="0" color="33554432" x="210" y="600" height="52" width="517" html.valueishtml="0"  name=sm_cliente_status_cte_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=10 alignment="0" tabsequence=80 border="5" color="33554432" x="750" y="364" height="56" width="137" format="[general]" html.valueishtml="0"  name=id_num_canal visible="1" editmask.mask="####" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=13 alignment="0" tabsequence=90 border="5" color="33554432" x="2427" y="364" height="56" width="137" format="[general]" html.valueishtml="0"  name=empleado visible="1" editmask.mask="####" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=15 alignment="0" tabsequence=110 border="5" color="33554432" x="750" y="600" height="56" width="137" format="[general]" html.valueishtml="0"  name=encargado visible="1" editmask.mask="####" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=16 alignment="0" tabsequence=190 border="5" color="33554432" x="910" y="600" height="52" width="795" format="[general]" html.valueishtml="0"  name=nombre_encargado visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+column(band=detail id=11 alignment="0" tabsequence=170 border="5" color="33554432" x="910" y="364" height="56" width="795" format="[general]" html.valueishtml="0"  name=nom_canal visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+button(band=detail text="Cliente NUEVO" enabled=yes action="0" border="0" color="33554432" x="5" y="16" height="80" width="512" vtextalign="0" htextalign="0"  name=b_nuevo visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="2" text="Fec. Reg." border="0" color="33554432" x="3072" y="20" height="56" width="320" html.valueishtml="0"  name=t_1 visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Celular:" border="0" color="33554432" x="1659" y="868" height="52" width="242" html.valueishtml="0"  name=sm_cliente_id_num_etapa_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="Ap Materno:" border="0" color="33554432" x="1339" y="56" height="56" width="370" html.valueishtml="0"  name=sm_cliente_ap_materno_cte_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="2" text="Nombre" border="0" color="33554432" x="2368" y="56" height="56" width="370" html.valueishtml="0"  name=sm_cliente_nom_cte_t visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=2 alignment="0" tabsequence=32766 border="5" color="33554432" x="3077" y="92" height="56" width="320" format="[general]" html.valueishtml="0"  name=fecha_registro visible="1" editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="553648127" )
+text(band=detail alignment="2" text="Cliente:" border="0" color="33554432" x="0" y="128" height="52" width="370" html.valueishtml="0"  name=t_5 visible="1"  font.face="Tahoma" font.height="-8" font.weight="700"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=1 alignment="0" tabsequence=10 border="5" color="33554432" x="347" y="124" height="56" width="215" format="[general]" html.valueishtml="0"  name=numcte visible="1" editmask.mask="#######" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=4 alignment="0" tabsequence=20 border="5" color="33554432" x="631" y="124" height="56" width="658" format="[general]" html.valueishtml="0"  name=ap_paterno_cte visible="1" edit.limit=0 edit.case=upper edit.focusrectangle=no edit.autoselect=no edit.required=yes  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=5 alignment="0" tabsequence=30 border="5" color="33554432" x="1339" y="124" height="56" width="658" format="[general]" html.valueishtml="0"  name=ap_materno_cte visible="1" edit.limit=0 edit.case=upper edit.focusrectangle=no edit.autoselect=no edit.required=yes  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=3 alignment="0" tabsequence=40 border="5" color="33554432" x="2080" y="124" height="56" width="658" format="[general]" html.valueishtml="0"  name=nom_cte visible="1" edit.limit=0 edit.case=upper edit.focusrectangle=no edit.autoselect=no edit.required=yes  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=18 alignment="2" tabsequence=140 border="5" color="33554432" x="1001" y="868" height="56" width="443" format="[general]" html.valueishtml="0"  name=tel_casa visible="1" editmask.mask="##-##-###-###" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=20 alignment="2" tabsequence=150 border="5" color="33554432" x="1925" y="868" height="56" width="443" format="[general]" html.valueishtml="0"  name=tel_celular visible="1" editmask.mask="##-##-###-###" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=19 alignment="2" tabsequence=160 border="5" color="33554432" x="2848" y="868" height="56" width="443" format="[general]" html.valueishtml="0"  name=tel_oficina visible="1" editmask.mask="##-##-###-###" editmask.focusrectangle=no  font.face="Tahoma" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 

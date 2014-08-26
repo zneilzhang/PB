@@ -1,0 +1,88 @@
+HA$PBExportHeader$gf_asigna_logo.srf
+$PBExportComments$(LAC) Asigna y ajusta el logo le$$HEX1$$ed00$$ENDHEX$$do del par$$HEX1$$e100$$ENDHEX$$metro 1
+global type gf_asigna_logo from function_object
+end type
+
+forward prototypes
+global function string gf_asigna_logo (window aw_ventana, datawindow adw_objeto)
+end prototypes
+
+global function string gf_asigna_logo (window aw_ventana, datawindow adw_objeto);//------------------------------------------------------------------
+//  FUNCION/EVENTO	:  gf_asigna_logo
+//
+//  DESCRIPCION		:  Asigna el logo de la BD en la dw del a ventana dada
+// 
+//  ARGUMENTOS			: 
+//		aw_ventana	
+//		adw_objeto
+//
+//  DEVUELVE			:
+//		El nombre del archivo generado
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  14/OCT/10	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//  21/OCT/10  JVM       Si se desea que se respete el tama$$HEX1$$f100$$ENDHEX$$o del objeto
+//								 p_logo_cliente establecido en el reporte, se debera
+//								 de poner el valor 1 en la propiedad tag del objeto
+//								 de tener un valor diferente, pondra el tama$$HEX1$$f100$$ENDHEX$$o default
+//								 de 200
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+picture	lp_dummie
+integer	li_width, li_height
+dec{2} ldec2_proporcion_width
+blob	lb_pic
+string ls_aux
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+//Valida que exista el logo (por si hubo cambio de logo en otra sesi$$HEX1$$f300$$ENDHEX$$n y no se ha actualizado la global de esta sesi$$HEX1$$f300$$ENDHEX$$n)
+if not fileexists(gnv_app.is_logorep) then
+	SELECT valor
+	INTO :ls_aux
+	FROM parametros_cia
+	WHERE sistema = 'EK' and 
+		id_parametro = 1;
+
+	ls_aux = left(gnv_app.is_logorep, lastpos(gnv_app.is_logorep, "\")) + "ektmp_" + gs_num_cia + "_" + ls_aux
+	if not fileexists(ls_aux) then
+		messagebox(gs_nombreapp, "No se ha encontrado el logo del proceso, se podr$$HEX2$$e1002000$$ENDHEX$$continuar pero no aparecer$$HEX2$$e1002000$$ENDHEX$$el logo~r- Salga y vuelva a entrar al m$$HEX1$$f300$$ENDHEX$$dulo", information!)
+		gnv_app.is_logorep = ""
+		return ""
+	else
+		//Actualiza la global del logo
+		gnv_app.is_logorep = ls_aux
+	end if
+end if
+
+//C$$HEX1$$f300$$ENDHEX$$digo para reajustar el logo del reporte
+aw_ventana.OpenUserObject ( lp_dummie, 20,20)
+
+lp_dummie.originalsize = true
+lp_dummie.picturename = gnv_app.is_logorep
+lp_dummie.bringtotop = true
+li_width = lp_dummie.width
+li_height = lp_dummie.height
+
+if li_height > 0 then
+	ldec2_proporcion_width = li_width / li_height
+	IF adw_objeto.describe("p_logo_cliente.tag") <> '1' THEN
+		adw_objeto.modify("p_logo_cliente.height = 200")
+	END IF
+	li_width = integer(integer(adw_objeto.describe("p_logo_cliente.height")) * ldec2_proporcion_width)
+	adw_objeto.modify("p_logo_cliente.x = 5")
+	adw_objeto.modify("p_logo_cliente.y = 5")
+	adw_objeto.modify("p_logo_cliente.width = " + string(li_width))
+	adw_objeto.modify("p_logo_cliente.filename = '" + gnv_app.is_logorep + "'")	
+end if
+
+//Destruye dummie
+aw_ventana.CloseUserObject ( lp_dummie ) 
+
+return ""
+end function
+

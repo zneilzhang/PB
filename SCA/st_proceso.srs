@@ -1,0 +1,7 @@
+HA$PBExportHeader$st_proceso.srs
+global type st_proceso from structure
+	string		ventana
+	integer		proceso
+	string		titulo
+end type
+

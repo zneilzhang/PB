@@ -1,0 +1,186 @@
+HA$PBExportHeader$d_brow_contactos_grales.srd
+release 10.5;
+datawindow(units=0 timer_interval=0 color=67108864 processing=0 HTMLDW=no print.printername="" print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.canusedefaultprinter=yes print.prompt=no print.buttons=no print.preview.buttons=no print.cliptext=no print.overrideprintjob=no print.collate=yes print.preview.outline=yes hidegrayline=no )
+header(height=0 color="536870912" )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=1080 color="536870912" )
+table(column=(type=decimal(0) update=yes updatewhereclause=yes key=yes name=numcte dbname="sca_contactos.numcte" )
+ column=(type=char(30) updatewhereclause=yes name=sca_contactos_nom_cte dbname="sca_contactos.nom_cte" )
+ column=(type=char(30) updatewhereclause=yes name=sca_contactos_ap_paterno_cte dbname="sca_contactos.ap_paterno_cte" )
+ column=(type=char(30) updatewhereclause=yes name=sca_contactos_ap_materno_cte dbname="sca_contactos.ap_materno_cte" )
+ column=(type=date updatewhereclause=yes name=sca_contactos_fec_registro dbname="sca_contactos.fec_registro" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_empleado dbname="sca_contactos.empleado" )
+ column=(type=char(92) updatewhereclause=yes name=nom_agente dbname="nom_agente" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_id_punto_venta dbname="sca_contactos.id_punto_venta" )
+ column=(type=char(50) updatewhereclause=yes name=nom_punto_vta dbname="nom_punto_vta" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_interes dbname="sca_contactos.interes" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_sexo dbname="sca_contactos.sexo" )
+ column=(type=char(20) updatewhereclause=yes name=sca_contactos_tel_casa dbname="sca_contactos.tel_casa" )
+ column=(type=char(20) updatewhereclause=yes name=sca_contactos_tel_oficina dbname="sca_contactos.tel_oficina" )
+ column=(type=char(20) updatewhereclause=yes name=sca_contactos_tel_celular dbname="sca_contactos.tel_celular" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_reune_puntuacion dbname="sca_contactos.reune_puntuacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_year_puntuacion dbname="sca_contactos.year_puntuacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_mes_puntuacion dbname="sca_contactos.mes_puntuacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_encargado dbname="sca_contactos.encargado" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_valida_informacion dbname="sca_contactos.valida_informacion" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_incidencia dbname="sca_contactos.incidencia" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_id_incidencia dbname="sca_contactos.id_incidencia" )
+ column=(type=char(100) updatewhereclause=yes name=sca_contactos_comentario dbname="sca_contactos.comentario" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_id_estrategia dbname="sca_contactos.id_estrategia" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=id_empresa dbname="sca_contactos.id_empresa" )
+ column=(type=char(80) updatewhereclause=yes name=nombre_empresa dbname="nombre_empresa" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=puesto dbname="sca_contactos.puesto" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=calle dbname="sca_contactos.calle" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=numero dbname="sca_contactos.numero" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=interior dbname="sca_contactos.interior" )
+ column=(type=char(5) update=yes updatewhereclause=yes name=cp dbname="sca_contactos.cp" )
+ column=(type=char(30) update=yes updatewhereclause=yes name=colonia dbname="sca_contactos.colonia" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=ciudad dbname="sca_contactos.ciudad" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=municipio dbname="sca_contactos.municipio" )
+ column=(type=char(40) update=yes updatewhereclause=yes name=estado dbname="sca_contactos.estado" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=imss dbname="sca_contactos.imss" )
+ column=(type=date update=yes updatewhereclause=yes name=fecha_nacimiento dbname="sca_contactos.fecha_nacimiento" )
+ column=(type=char(13) update=yes updatewhereclause=yes name=rfc dbname="sca_contactos.rfc" )
+ column=(type=decimal(0) update=yes updatewhereclause=yes name=id_num_relacion_probable dbname="sca_contactos.id_num_relacion_probable" values="INFONAVIT	1/FOVISSSTE	4/SUBSIDIO	9/OTROS	2/" )
+ column=(type=char(1) update=yes updatewhereclause=yes name=recomienda dbname="sca_contactos.recomienda" initial="N" values="No	N/Si	S/" )
+ column=(type=char(35) update=yes updatewhereclause=yes name=referencia1 dbname="sca_contactos.referencia1" )
+ column=(type=char(35) update=yes updatewhereclause=yes name=referencia2 dbname="sca_contactos.referencia2" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=tel_ref1 dbname="sca_contactos.tel_ref1" )
+ column=(type=char(10) update=yes updatewhereclause=yes name=tel_ref2 dbname="sca_contactos.tel_ref2" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=parentesco_ref1 dbname="sca_contactos.parentesco_ref1" )
+ column=(type=char(20) update=yes updatewhereclause=yes name=parentesco_ref2 dbname="sca_contactos.parentesco_ref2" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_reune_puntuacion dbname="sca_contactos.reune_puntuacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_year_puntuacion dbname="sca_contactos.year_puntuacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_mes_puntuacion dbname="sca_contactos.mes_puntuacion" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_encargado dbname="sca_contactos.encargado" )
+ column=(type=char(92) updatewhereclause=yes name=nom_empleado dbname="nom_empleado" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_valida_informacion dbname="sca_contactos.valida_informacion" )
+ column=(type=char(1) updatewhereclause=yes name=sca_contactos_incidencia dbname="sca_contactos.incidencia" )
+ column=(type=decimal(0) updatewhereclause=yes name=sca_contactos_id_incidencia dbname="sca_contactos.id_incidencia" )
+ column=(type=char(100) updatewhereclause=yes name=sca_contactos_comentario dbname="sca_contactos.comentario" )
+ retrieve="  SELECT ~"sca_contactos~".~"numcte~",   
+         ~"sca_contactos~".~"nom_cte~",   
+         ~"sca_contactos~".~"ap_paterno_cte~",   
+         ~"sca_contactos~".~"ap_materno_cte~",   
+         ~"sca_contactos~".~"fec_registro~",   
+         ~"sca_contactos~".~"empleado~",   
+		nom_agente = sm_agente.nom_empleado + ' '+ sm_agente.ap_paterno_empleado + ' '+sm_agente.ap_materno_empleado,
+         ~"sca_contactos~".~"id_punto_venta~",   
+		nom_punto_vta = descripcion_pv,
+         ~"sca_contactos~".~"interes~",   
+         ~"sca_contactos~".~"sexo~",   
+         ~"sca_contactos~".~"tel_casa~",   
+         ~"sca_contactos~".~"tel_oficina~",   
+         ~"sca_contactos~".~"tel_celular~",    
+         ~"sca_contactos~".~"reune_puntuacion~",   
+         ~"sca_contactos~".~"year_puntuacion~",   
+         ~"sca_contactos~".~"mes_puntuacion~",   
+         ~"sca_contactos~".~"encargado~",   
+         ~"sca_contactos~".~"valida_informacion~",   
+         ~"sca_contactos~".~"incidencia~",   
+         ~"sca_contactos~".~"id_incidencia~",   
+         ~"sca_contactos~".~"comentario~",
+		sca_contactos.id_estrategia , 
+
+		~"sca_contactos~".~"id_empresa~",   
+		nombre_empresa = sm_empresa.nombre_empresa,
+         ~"sca_contactos~".~"puesto~",   
+         ~"sca_contactos~".~"calle~",   
+         ~"sca_contactos~".~"numero~",   
+         ~"sca_contactos~".~"interior~",   
+         ~"sca_contactos~".~"cp~",   
+         ~"sca_contactos~".~"colonia~",   
+         ~"sca_contactos~".~"ciudad~",   
+         ~"sca_contactos~".~"municipio~",
+		sca_contactos.estado,   
+         ~"sca_contactos~".~"imss~",   
+         ~"sca_contactos~".~"fecha_nacimiento~",   
+         ~"sca_contactos~".~"rfc~",   
+         ~"sca_contactos~".~"id_num_relacion_probable~",   
+         ~"sca_contactos~".~"recomienda~",   
+         ~"sca_contactos~".~"referencia1~",   
+         ~"sca_contactos~".~"referencia2~",   
+         ~"sca_contactos~".~"tel_ref1~",   
+         ~"sca_contactos~".~"tel_ref2~",   
+         ~"sca_contactos~".~"parentesco_ref1~",   
+         ~"sca_contactos~".~"parentesco_ref2~"	,
+ 
+         ~"sca_contactos~".~"reune_puntuacion~",   
+         ~"sca_contactos~".~"year_puntuacion~",   
+         ~"sca_contactos~".~"mes_puntuacion~",   
+         ~"sca_contactos~".~"encargado~",   
+		nom_empleado = sma.nom_empleado + ' ' +sma.ap_paterno_empleado+' '+sma.ap_materno_empleado,
+         ~"sca_contactos~".~"valida_informacion~",   
+         ~"sca_contactos~".~"incidencia~",   
+         ~"sca_contactos~".~"id_incidencia~",   
+         ~"sca_contactos~".~"comentario~"  
+
+    FROM ~"sca_contactos~"  left outer join  sm_agente
+						on sca_contactos.empleado =  sm_agente.empleado 
+					left outer join sm_agente sma
+						on sca_contactos.encargado =  sma.empleado 
+					left outer join sm_punto_venta
+						on sca_contactos.id_punto_venta = sm_punto_venta.id_punto_venta
+					left outer join sm_empresa
+								on sca_contactos.id_empresa = sm_empresa.id_empresa		
+
+
+	where sca_contactos.numcte = :an_numcte
+" update="sca_contactos" updatewhere=0 updatekeyinplace=no arguments=(("an_numcte", number)) )
+groupbox(band=detail text="Direcci$$HEX1$$f300$$ENDHEX$$n"border="5" color="33554432" x="9" y="96" height="296" width="3561"  name=gb_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+groupbox(band=detail text="Referencias:"border="5" color="33554432" x="9" y="712" height="336" width="3561"  name=gb_2 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+column(band=detail id=24 alignment="1" tabsequence=32766 border="5" color="33554432" x="1993" y="32" height="64" width="169" format="[general]" html.valueishtml="0"  name=id_empresa visible="0" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Id Empresa:" border="0" color="33554432" x="0" y="20" height="56" width="439" html.valueishtml="0"  name=id_empresa_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=25 alignment="0" tabsequence=10 border="5" color="33554432" x="475" y="16" height="64" width="1504" format="[general]" html.valueishtml="0"  name=nombre_empresa visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=26 alignment="0" tabsequence=20 border="5" color="33554432" x="2446" y="16" height="64" width="850" format="[general]" html.valueishtml="0"  name=puesto visible="1" edit.limit=30 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Puesto:" border="0" color="33554432" x="2185" y="20" height="56" width="242" html.valueishtml="0"  name=puesto_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Fecha Nacimiento:" border="0" color="33554432" x="0" y="500" height="56" width="439" html.valueishtml="0"  name=fecha_nacimiento_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=36 alignment="0" tabsequence=120 border="5" color="33554432" x="485" y="496" height="64" width="370" format="[general]" html.valueishtml="0"  name=fecha_nacimiento visible="1" editmask.ddcalendar=yes editmask.mask="dd/mm/yyyy" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=38 alignment="1" tabsequence=140 border="0" color="33554432" x="2222" y="496" height="64" width="1385" format="[general]" html.valueishtml="0"  name=id_num_relacion_probable visible="1" radiobuttons.columns=4 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="1" text="Esquema Probable:" border="0" color="33554432" x="1714" y="500" height="56" width="485" html.valueishtml="0"  name=id_num_relacion_probable_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Rfc:" border="0" color="33554432" x="923" y="496" height="64" width="229" html.valueishtml="0"  name=rfc_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=37 alignment="0" tabsequence=130 border="5" color="33554432" x="1193" y="492" height="64" width="434" format="[general]" html.valueishtml="0"  name=rfc visible="1" edit.limit=13 edit.case=upper edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Recomienda:" border="0" color="33554432" x="0" y="616" height="56" width="439" html.valueishtml="0"  name=recomienda_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=39 alignment="0" tabsequence=150 border="0" color="33554432" x="507" y="612" height="64" width="347" format="[general]" html.valueishtml="0"  name=recomienda visible="1" radiobuttons.columns=2 radiobuttons.scale=no radiobuttons.threed=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="67108864" )
+text(band=detail alignment="1" text="IMSS:" border="0" color="33554432" x="919" y="616" height="56" width="229" html.valueishtml="0"  name=imss_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=35 alignment="0" tabsequence=110 border="5" color="33554432" x="1193" y="612" height="64" width="434" format="[general]" html.valueishtml="0"  name=imss visible="1" editmask.mask="##########" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=40 alignment="0" tabsequence=160 border="5" color="33554432" x="462" y="792" height="64" width="987" format="[general]" html.valueishtml="0"  name=referencia1 visible="1" edit.limit=35 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Nombre:" border="0" color="33554432" x="0" y="796" height="56" width="439" html.valueishtml="0"  name=referencia1_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Telefono:" border="0" color="33554432" x="1591" y="796" height="56" width="265" html.valueishtml="0"  name=tel_ref1_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=42 alignment="0" tabsequence=180 border="5" color="33554432" x="1897" y="792" height="64" width="393" format="[general]" html.valueishtml="0"  name=tel_ref1 visible="1" editmask.mask="##-##-###-###" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Parentesco:" border="0" color="33554432" x="2318" y="796" height="56" width="302" html.valueishtml="0"  name=parentesco_ref1_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=44 alignment="0" tabsequence=200 border="5" color="33554432" x="2656" y="792" height="64" width="695" format="[general]" html.valueishtml="0"  name=parentesco_ref1 visible="1" edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=41 alignment="0" tabsequence=170 border="5" color="33554432" x="462" y="920" height="64" width="987" format="[general]" html.valueishtml="0"  name=referencia2 visible="1" edit.limit=35 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Telefono:" border="0" color="33554432" x="1591" y="924" height="56" width="265" html.valueishtml="0"  name=tel_ref2_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=43 alignment="0" tabsequence=190 border="5" color="33554432" x="1897" y="920" height="64" width="393" format="[general]" html.valueishtml="0"  name=tel_ref2 visible="1" editmask.mask="##-##-###-###" editmask.focusrectangle=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Parentesco" border="0" color="33554432" x="2318" y="924" height="56" width="302" html.valueishtml="0"  name=parentesco_ref2_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=45 alignment="0" tabsequence=210 border="5" color="33554432" x="2656" y="920" height="64" width="704" format="[general]" html.valueishtml="0"  name=parentesco_ref2 visible="1" edit.limit=20 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Nombre:" border="0" color="33554432" x="0" y="924" height="56" width="439" html.valueishtml="0"  name=referencia2_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+text(band=detail alignment="1" text="Calle:" border="0" color="33554432" x="87" y="300" height="56" width="183" html.valueishtml="0"  name=calle_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=27 alignment="0" tabsequence=70 border="5" color="33554432" x="311" y="296" height="64" width="850" format="[general]" html.valueishtml="0"  name=calle visible="1" edit.limit=30 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Numero:" border="0" color="33554432" x="1221" y="296" height="64" width="274" html.valueishtml="0"  name=numero_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=28 alignment="0" tabsequence=80 border="5" color="33554432" x="1541" y="296" height="64" width="503" format="[general]" html.valueishtml="0"  name=numero visible="1" edit.limit=10 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Interior:" border="0" color="33554432" x="2098" y="300" height="56" width="251" html.valueishtml="0"  name=interior_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=29 alignment="0" tabsequence=90 border="5" color="33554432" x="2377" y="296" height="64" width="503" format="[general]" html.valueishtml="0"  name=interior visible="1" edit.limit=10 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="CP." border="0" color="33554432" x="3031" y="300" height="56" width="133" html.valueishtml="0"  name=cp_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=30 alignment="2" tabsequence=100 border="5" color="33554432" x="3191" y="296" height="64" width="302" format="[general]" html.valueishtml="0"  name=cp visible="1" edit.limit=5 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Estado:" border="0" color="33554432" x="0" y="184" height="56" width="274" html.valueishtml="0"  name=t_1 visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=34 alignment="0" tabsequence=30 border="5" color="33554432" x="315" y="184" height="56" width="503" format="[general]" html.valueishtml="0"  name=estado visible="1" edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=no  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Ciudad:" border="0" color="33554432" x="896" y="180" height="64" width="233" html.valueishtml="0"  name=ciudad_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=32 alignment="0" tabsequence=40 border="5" color="33554432" x="1157" y="180" height="64" width="503" format="[general]" html.valueishtml="0"  name=ciudad visible="1" edit.limit=10 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Municipio:" border="0" color="33554432" x="1710" y="184" height="56" width="251" html.valueishtml="0"  name=municipio_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+column(band=detail id=33 alignment="0" tabsequence=50 border="5" color="33554432" x="1970" y="180" height="64" width="402" format="[general]" html.valueishtml="0"  name=municipio visible="1" edit.limit=10 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+column(band=detail id=31 alignment="0" tabsequence=60 border="5" color="33554432" x="2629" y="180" height="64" width="850" format="[general]" html.valueishtml="0"  name=colonia visible="1" edit.limit=30 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="2" background.color="1073741824" )
+text(band=detail alignment="1" text="Colonia:" border="0" color="33554432" x="2405" y="184" height="56" width="183" html.valueishtml="0"  name=colonia_t visible="1"  font.face="Arial" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" encodeselflinkargs="1" netscapelayers="0" pagingmethod=0 generatedddwframes="1" )
+xhtmlgen() cssgen(sessionspecific="0" )
+xmlgen(inline="0" )
+xsltgen()
+jsgen()
+export.xml(headgroups="1" includewhitespace="0" metadatatype=0 savemetadata=0 )
+import.xml()
+export.pdf(method=0 distill.custompostscript="0" xslfop.print="0" )
+export.xhtml()
+ 
