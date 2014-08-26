@@ -1,16 +1,16 @@
 Save Format v3.0(19990112)
 @begin Libraries
- "sca\\sca.pbl" "";
+ "SCA\\sca.pbl" "";
 @end;
 @begin Objects
- "sca\\m_apppfc_frame.srm" "sca\\sca.pbl";
- "sca\\f_fecha_mes.srf" "sca\\sca.pbl";
- "sca\\d_config_ayuda.srd" "sca\\sca.pbl";
- "sca\\gf_asigna_logo.srf" "sca\\sca.pbl";
- "sca\\w_consulta_ventas.srw" "sca\\sca.pbl";
- "sca\\n_cst_principal_appmanager_sca.sru" "sca\\sca.pbl";
- "sca\\n_tr_sca.sru" "sca\\sca.pbl";
- "sca\\st_proceso.srs" "sca\\sca.pbl";
- "sca\\sca.sra" "sca\\sca.pbl";
+ "SCA\\m_apppfc_frame.srm" "SCA\\sca.pbl";
+ "SCA\\f_fecha_mes.srf" "SCA\\sca.pbl";
+ "SCA\\d_config_ayuda.srd" "SCA\\sca.pbl";
+ "SCA\\gf_asigna_logo.srf" "SCA\\sca.pbl";
+ "SCA\\w_consulta_ventas.srw" "SCA\\sca.pbl";
+ "SCA\\n_cst_principal_appmanager_sca.sru" "SCA\\sca.pbl";
+ "SCA\\n_tr_sca.sru" "SCA\\sca.pbl";
+ "SCA\\st_proceso.srs" "SCA\\sca.pbl";
+ "SCA\\sca.sra" "SCA\\sca.pbl";
  "sca\\w_logon.srw" "sca\\sca.pbl";
 @end;
