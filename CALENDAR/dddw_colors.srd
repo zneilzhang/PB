@@ -1,0 +1,18 @@
+HA$PBExportHeader$dddw_colors.srd
+release 7;
+datawindow(units=0 timer_interval=0 color=1090519039 processing=0 HTMLDW=no print.documentname="" print.orientation = 0 print.margin.left = 110 print.margin.right = 110 print.margin.top = 96 print.margin.bottom = 96 print.paper.source = 0 print.paper.size = 0 print.prompt=no print.buttons=no print.preview.buttons=no )
+summary(height=0 color="536870912" )
+footer(height=0 color="536870912" )
+detail(height=60 color="553648127" )
+table(column=(type=char(100) updatewhereclause=yes name=name dbname="name" )
+ column=(type=number updatewhereclause=yes name=red dbname="red" )
+ column=(type=number updatewhereclause=yes name=green dbname="green" )
+ column=(type=number updatewhereclause=yes name=blue dbname="blue" )
+ column=(type=number updatewhereclause=yes name=rgb dbname="rgb" )
+  sort="cc_color A " )
+data("(Button Face)",null null null  78682240,"(Window Text)",null null  0, 33554592,"(Application Workspace)",null null null  268435456,"(Window Background)",null null null  1087434968,"Blue", 0, 0, 255, -1,"Red", 255, 0, 0, -1,"White", 255, 255, 255, -1,"Black", 0, 0, 0, -1,"Fuchsia", 255, 0, 255, -1,"Lime", 0, 255, 0, -1,"Yellow", 255, 255, 0, -1,"Aqua", 0, 255, 255, -1,"Maroon", 128, 0, 0, -1,"Olive", 128, 128, 0, -1,"Navy", 0, 0, 128, -1,"Teal", 0, 128, 128, -1,"Gray", 128, 128, 128, -1,"Silver", 192, 192, 192, -1,"Mint", 192, 220, 192, -1,"Sky", 166, 202, 240, -1,"Cream", 255, 251, 240, -1,"Purple", 128, 0, 128, -1,"Green", 0, 128, 0, -1,) 
+column(band=detail id=1 alignment="0" tabsequence=32766 border="0" color="0" x="105" y="0" height="52" width="1202" format="[general]"  name=name edit.limit=0 edit.case=any edit.focusrectangle=no edit.autoselect=yes edit.autohscroll=yes  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+rectangle(band=detail x="9" y="4" height="48" width="82"  name=r_display brush.hatch="6" brush.color="0~t cc_color " pen.style="0" pen.width="5" pen.color="0"  background.mode="2" background.color="0" )
+compute(band=detail alignment="0" expression="if ( isnull(rgb) or rgb < 0 , rgb(red,green,blue), rgb)"border="0" color="0" x="224" y="144" height="52" width="183" format="[GENERAL]"  name=cc_color visible="1~t0"  font.face="MS Sans Serif" font.height="-8" font.weight="400"  font.family="2" font.pitch="2" font.charset="0" background.mode="1" background.color="536870912" )
+htmltable(border="1" )
+htmlgen(clientevents="1" clientvalidation="1" clientcomputedfields="1" clientformatting="0" clientscriptable="0" generatejavascript="1" )
