@@ -1,0 +1,16 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "CALENDAR\\calendar_exampleapp.pbl" "";
+@end;
+@begin Objects
+ "CALENDAR\\w_calendarproperties.srw" "CALENDAR\\calendar_exampleapp.pbl";
+ "CALENDAR\\d_editday.srd" "CALENDAR\\calendar_exampleapp.pbl";
+ "CALENDAR\\w_editday.srw" "CALENDAR\\calendar_exampleapp.pbl";
+ "CALENDAR\\dddw_pictures.srd" "CALENDAR\\calendar_exampleapp.pbl";
+ "CALENDAR\\n_cst_appmanager_calendar.sru" "CALENDAR\\calendar_exampleapp.pbl";
+ "CALENDAR\\dddw_colors.srd" "CALENDAR\\calendar_exampleapp.pbl";
+ "CALENDAR\\d_properties.srd" "CALENDAR\\calendar_exampleapp.pbl";
+ "CALENDAR\\w_main_calendarexample.srw" "CALENDAR\\calendar_exampleapp.pbl";
+ "CALENDAR\\calendar_exampleapp.sra" "CALENDAR\\calendar_exampleapp.pbl";
+ "CALENDAR\\n_cst_dayattrib.sru" "CALENDAR\\calendar_exampleapp.pbl";
+@end;
