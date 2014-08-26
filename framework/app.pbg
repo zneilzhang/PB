@@ -1,0 +1,27 @@
+Save Format v3.0(19990112)
+@begin Libraries
+ "framework\\app.pbl" "";
+@end;
+@begin Objects
+ "framework\\f_fecha_mes.srf" "framework\\app.pbl";
+ "framework\\w_autorizacion.srw" "framework\\app.pbl";
+ "framework\\w_catalogo_n2a.srw" "framework\\app.pbl";
+ "framework\\w_catalogo.srw" "framework\\app.pbl";
+ "framework\\app.sra" "framework\\app.pbl";
+ "framework\\w_catalogo123.srw" "framework\\app.pbl";
+ "framework\\w_logon.srw" "framework\\app.pbl";
+ "framework\\w_consulta.srw" "framework\\app.pbl";
+ "framework\\w_imprimir.srw" "framework\\app.pbl";
+ "framework\\u_tab_catalogos.sru" "framework\\app.pbl";
+ "framework\\w_principal_frame.srw" "framework\\app.pbl";
+ "framework\\gf_obtiene_ancho_alto_original.srf" "framework\\app.pbl";
+ "framework\\n_cst_principal_appmanager.sru" "framework\\app.pbl";
+ "framework\\w_catalogo_tabdetalle.srw" "framework\\app.pbl";
+ "framework\\w_isql.srw" "framework\\app.pbl";
+ "framework\\gf_lee_parametro.srf" "framework\\app.pbl";
+ "framework\\w_catalogo_ok.srw" "framework\\app.pbl";
+ "framework\\gf_asigna_logo.srf" "framework\\app.pbl";
+ "framework\\w_catalogo2.srw" "framework\\app.pbl";
+ "framework\\w_catalogo_captura.srw" "framework\\app.pbl";
+ "framework\\gf_ajusta_logo.srf" "framework\\app.pbl";
+@end;
