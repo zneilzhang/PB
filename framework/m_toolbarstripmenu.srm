@@ -1,0 +1,42 @@
+HA$PBExportHeader$m_toolbarstripmenu.srm
+forward
+global type m_toolbarstripmenu from menu
+end type
+end forward
+
+global type m_toolbarstripmenu from menu
+end type
+global m_toolbarstripmenu m_toolbarstripmenu
+
+type variables
+u_cst_toolbarstrip iuo_parent
+end variables
+
+on m_toolbarstripmenu.create
+m_toolbarstripmenu=this
+call super::create
+this.text = "m_toolbarstripmenu"
+this.menutextcolor = 134217735
+this.menubackcolor = 134217732
+this.menuhighlightcolor = 134217741
+this.textsize = 8
+this.weight = 400
+this.facename = "Tahoma"
+this.titlebackcolor = 134217730
+this.bitmapbackcolor = 12632256
+this.menubitmaps = true
+this.titlegradient = true
+this.toolbartextcolor = 134217746
+this.toolbarbackcolor = 67108864
+this.toolbarhighlightcolor = 134217741
+this.toolbargradient = true
+this.bitmapgradient = true
+end on
+
+on m_toolbarstripmenu.destroy
+call super::destroy
+end on
+
+event clicked;iuo_parent.EVENT ue_buttonclicked(THIS.Text)
+end event
+

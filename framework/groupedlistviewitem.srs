@@ -1,0 +1,17 @@
+HA$PBExportHeader$groupedlistviewitem.srs
+global type groupedlistviewitem from structure
+	unsignedlong		mask
+	long		iitem
+	long		isubitem
+	unsignedlong		state
+	unsignedlong		statemask
+	string		psztext
+	long		cchtextmax
+	long		iimage
+	long		lparam
+	long		iindent
+	long		igroupid
+	unsignedlong		ccolumns
+	unsignedlong		pucolumns
+end type
+
