@@ -1,0 +1,71 @@
+HA$PBExportHeader$gf_destruye_tablas.srf
+$PBExportComments$(LAC) Borra las tablas especificadas en el argumento
+global type gf_destruye_tablas from function_object
+end type
+
+forward prototypes
+global function integer gf_destruye_tablas (string as_nombre_tablas)
+end prototypes
+
+global function integer gf_destruye_tablas (string as_nombre_tablas);//------------------------------------------------------------------
+//  MODULO/FUNCION	:	gf_destruye_tablas
+//
+//  DESCRIPCION		:	Borra las tablas especificadas en el argumento
+// 
+//  EVENTO/ARGUMENTOS: 
+//		as_nombre_tablas	:	String con el (los) nombre(s) de la(s) tabla(s)
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  22/MAR/00	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+
+String	ls_sql, ls_Mensaje, ls_tabla
+Integer	li_contador
+string lsarr_tablas[]
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+SetPointer(Hourglass!)
+
+If IsNull(as_nombre_tablas) Or Trim(as_nombre_tablas) = "" Then Return 0
+ls_mensaje = ""
+as_nombre_tablas = as_nombre_tablas + ","
+li_contador = 1
+
+gnv_funciones_string.of_ParseToArray(as_nombre_tablas, ",", lsarr_tablas)
+
+FOR li_contador = 1 TO UpperBound(lsarr_tablas)
+	
+	ls_tabla = lsarr_tablas[li_contador]
+	
+	// Borra la tabla
+	ls_sql			=	"drop table " + ls_tabla
+	EXECUTE IMMEDIATE :ls_sql;
+	IF sqlca.SQLCode <> 0 THEN
+		ls_Mensaje = ls_Mensaje + "- " + ls_tabla + "(" + SQLCA.SQLErrText + ")~r"
+	Else
+		Commit Using SQLCA;
+	End If
+	
+NEXT
+
+// Despliega el mensaje de error si es necesario
+If Trim(ls_Mensaje) <> "" Then
+	MessageBox( "Error", "No se lograron eliminar las siguientes tablas : " + ls_Mensaje + "favor de intentarlo m$$HEX1$$e100$$ENDHEX$$s tarde", exclamation! ) 
+	Rollback; 
+	Return -1
+End If
+
+Return 0
+
+end function
+

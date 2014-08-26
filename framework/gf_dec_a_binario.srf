@@ -1,0 +1,60 @@
+HA$PBExportHeader$gf_dec_a_binario.srf
+$PBExportComments$(LAC) Rutina que convierte un n$$HEX1$$fa00$$ENDHEX$$mero decimal a binario
+global type gf_dec_a_binario from function_object
+end type
+
+forward prototypes
+global function string gf_dec_a_binario (integer ai_numero)
+end prototypes
+
+global function string gf_dec_a_binario (integer ai_numero);//------------------------------------------------------------------
+//  MODULO/FUNCION	: 
+//
+//  DESCRIPCION		: 
+//		Rutina que convierte un n$$HEX1$$fa00$$ENDHEX$$mero decimal a binario, el
+//		n$$HEX1$$fa00$$ENDHEX$$mero binario se devuelve como un string, ej: "10011"
+// 
+//  EVENTO/ARGUMENTOS: 
+//		ai_numero	:	N$$HEX1$$fa00$$ENDHEX$$mero a convertir (debe ser un entero)
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  22/MAR/00	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+Integer	li_dividendo, li_residuo, li_contador, li_tama$$HEX1$$f100$$ENDHEX$$o
+String		ls_num_binario, ls_aux
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+SetPointer(Hourglass!)
+
+ls_num_binario = ""
+li_dividendo = ai_numero
+Do Until li_dividendo < 2
+	//Genera el string del n$$HEX1$$fa00$$ENDHEX$$mero binario
+	ls_num_binario = ls_num_binario + String(Mod(li_dividendo, 2))
+	//Obtiene el siguiente dividendo
+	li_dividendo = Truncate(li_dividendo / 2, 0)
+Loop
+//Toma el $$HEX1$$fa00$$ENDHEX$$ltimo dividendo
+ls_num_binario = ls_num_binario + String(li_dividendo)
+
+//Lee el string generado para voltearlo
+li_tama$$HEX1$$f100$$ENDHEX$$o = len(Trim(ls_num_binario))
+For li_contador = li_Tama$$HEX1$$f100$$ENDHEX$$o To 1 Step -1
+	ls_aux = ls_aux + Mid ( ls_num_binario, li_contador , 1)
+Next
+
+//Devuelve el n$$HEX1$$fa00$$ENDHEX$$mero binario
+Return  ls_aux
+end function
+

@@ -1,0 +1,47 @@
+HA$PBExportHeader$gf_f1.srf
+$PBExportComments$(DT) Funci$$HEX1$$f300$$ENDHEX$$n que manda llamar la ventana de ayuda
+global type gf_f1 from function_object
+end type
+
+forward prototypes
+global subroutine gf_f1 (string as_cve_ayuda, string as_titulo_ayuda, string as_where_ayuda, string as_regresa_ayuda, boolean ab_seleccion_multiple, n_tr atr_conexion_cia)
+end prototypes
+
+global subroutine gf_f1 (string as_cve_ayuda, string as_titulo_ayuda, string as_where_ayuda, string as_regresa_ayuda, boolean ab_seleccion_multiple, n_tr atr_conexion_cia);//------------------------------------------------------------------
+//  MODULO/FUNCION	: gf_f1
+//
+//  DESCRIPCION		: Funcion que manda llamar la ventana de ayuda
+// 
+//  EVENTO/ARGUMENTOS: 
+//      gstr_param_ayuda  :  Estructura con cve_ayuda, titulo, where y
+//									  objeto transacci$$HEX1$$f300$$ENDHEX$$n de la ayuda
+//
+//  DEVUELVE			:
+//	  u_dw_reg_parametro   :  u_dw con los registros seleccionados
+//		 
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  07/MAY/01	DTR	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+gstr_param_ayuda       str_param_ayuda
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+str_param_ayuda.cve_ayuda = as_cve_ayuda
+str_param_ayuda.titulo = as_titulo_ayuda
+str_param_ayuda.where = as_where_ayuda
+str_param_ayuda.regresa_ayuda = as_regresa_ayuda
+str_param_ayuda.conexion_cia = atr_conexion_cia
+str_param_ayuda.ab_seleccion_multiple = ab_seleccion_multiple
+openwithparm(w_ayuda, str_param_ayuda)
+
+
+
+end subroutine
+

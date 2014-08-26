@@ -1,0 +1,21 @@
+HA$PBExportHeader$gf_elimina_acentos.srf
+global type gf_elimina_acentos from function_object
+end type
+
+forward prototypes
+global function string gf_elimina_acentos (string as_source)
+end prototypes
+
+global function string gf_elimina_acentos (string as_source);
+
+IF match(as_source,  '[^$$HEX1$$e100$$ENDHEX$$]'  ) THEN as_source = gnv_funciones_string.of_globalreplace(as_source, '$$HEX1$$e100$$ENDHEX$$', 'a', TRUE)
+IF match(as_source,  '[^$$HEX1$$e900$$ENDHEX$$]'  ) THEN as_source = gnv_funciones_string.of_globalreplace(as_source, '$$HEX1$$e900$$ENDHEX$$', 'e', TRUE)
+IF match(as_source,  '[^$$HEX1$$ed00$$ENDHEX$$]'  ) THEN as_source = gnv_funciones_string.of_globalreplace(as_source, '$$HEX1$$ed00$$ENDHEX$$', 'i', TRUE)
+IF match(as_source,  '[^$$HEX1$$f300$$ENDHEX$$]'  ) THEN as_source = gnv_funciones_string.of_globalreplace(as_source, '$$HEX1$$f300$$ENDHEX$$', 'o', TRUE)
+IF match(as_source,  '[^$$HEX1$$fa00$$ENDHEX$$]'  ) THEN as_source = gnv_funciones_string.of_globalreplace(as_source, '$$HEX1$$fa00$$ENDHEX$$', 'u', TRUE)
+
+
+RETURN as_source
+
+end function
+

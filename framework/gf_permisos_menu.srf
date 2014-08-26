@@ -1,0 +1,93 @@
+HA$PBExportHeader$gf_permisos_menu.srf
+global type gf_permisos_menu from function_object
+end type
+
+forward prototypes
+global function integer gf_permisos_menu (menu am_menu, n_ds ads_permisos)
+end prototypes
+
+global function integer gf_permisos_menu (menu am_menu, n_ds ads_permisos);//------------------------------------------------------------------
+//  FUNCION/EVENTO	: gf_permisos_menu
+//
+//  DESCRIPCION		: Funcion encargada de apagar las opciones de 
+// 						  menu
+//
+//  ARGUMENTOS			: 
+//		am_menu			: nombre del menu
+//		
+//		
+//
+//  DEVUELVE			:
+//		  0	: 	Si no tiene hijos
+//		  1   :  Si todo va correctamente
+//		
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  31/AGO/05	JAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//  27/ABR/11	LEC	    Se ajusto para agregar el parametro del ds de permisos y no tomar en cuenta excepciones
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+
+Integer  ll_desglose, li_regresa, li_ciclo, li_visible, li_enable, li_busca, li_busca_1
+String	ls_menu, ls_padre, ls_texto 
+Boolean  lb_visible, lb_enable
+long ll_row
+
+menu	ldarr[], lm_menu, lm_padre
+//n_ds lds_permisos, lds_excepciones
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+if not isvalid(am_menu) then return 0
+
+ldarr = am_menu.item[]
+
+ll_desglose = upperbound(ldarr)
+
+If ll_desglose > 0 Then
+	For li_ciclo = 1 To ll_desglose
+		lm_menu    = ldarr[li_ciclo]
+		if not isvalid(lm_menu) then return 0
+		
+		ls_menu    = ldarr[li_ciclo].classname()
+		
+		IF ls_menu = 'm_file' OR ls_menu = 'm_edit' OR ls_menu =  'm_view' OR &
+			ls_menu = 'm_insert' OR ls_menu = 'm_window' OR ls_menu =  'm_help' THEN CONTINUE
+		
+		li_regresa = gf_permisos_menu(lm_menu, ads_permisos)
+
+		li_busca = ads_permisos.Find("menu = '"+ls_menu+"'", 1 ,ads_permisos.RowCount())
+		
+		If li_busca = 0 Then
+			ldarr[li_ciclo].enabled = False
+			ldarr[li_ciclo].visible = False
+			ldarr[li_ciclo].toolbaritemvisible = False				
+		End IF		
+	Next
+End IF
+
+//Barre el men$$HEX2$$fa002000$$ENDHEX$$para quitar los separadores empalmados 
+ldarr = am_menu.item[]
+ll_desglose = upperbound(ldarr)
+for li_ciclo = 1 to ll_desglose
+	ls_texto    = ldarr[li_ciclo].text
+	//...si el separador est$$HEX2$$e1002000$$ENDHEX$$visible, valida que le siga una opci$$HEX1$$f300$$ENDHEX$$n visible
+	if ls_texto = '-' and ldarr[li_ciclo].visible then
+		if li_ciclo + 1 <= ll_desglose then
+			if not ldarr[li_ciclo + 1].visible then ldarr[li_ciclo].visible = false
+		else
+			ldarr[li_ciclo].visible = false
+		end if
+	end if
+next
+
+yield()
+
+return 1
+end function
+

@@ -1,0 +1,141 @@
+HA$PBExportHeader$gf_envia_tecla.srf
+$PBExportComments$(LAC) Funci$$HEX1$$f300$$ENDHEX$$n que envia las teclas
+global type gf_envia_tecla from function_object
+end type
+
+forward prototypes
+global function integer gf_envia_tecla (boolean ab_presionado, integer ai_codigo)
+end prototypes
+
+global function integer gf_envia_tecla (boolean ab_presionado, integer ai_codigo);//------------------------------------------------------------------
+//  EVENTO/FUNCION	:	gf_envia_tecla
+//
+//  DESCRIPCION		:	Rutina que envia la tecla dada
+// 
+//  EVENTO/ARGUMENTOS: 
+//		ab_presionado	:	Indica si se manda presionar o liberar la tecla
+//								True	:	Presionar tecla
+//								False	:	Liberar tecla
+//
+//		ai_codigo		:	C$$HEX1$$f300$$ENDHEX$$digo de la tecla a enviar
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  16/JUN/03	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+if ab_presionado then
+	//Presiona tecla
+	keybd_event(ai_codigo,0,0,0)	
+else
+	//Libera tecla
+	keybd_event(ai_codigo,0,2,0)	
+end if
+
+return 0
+/*
+/*
+ * Virtual Keys, Standard Set
+ */
+integer VK_LBUTTON        = 01
+integer VK_RBUTTON        = 02
+integer VK_CANCEL         = 03
+integer VK_MBUTTON        = 04    /* NOT contiguous with L & RBUTTON */
+
+integer VK_BACK           = 08
+integer VK_TAB            = 09
+
+integer VK_CLEAR          = 12
+integer VK_RETURN         = 13
+
+integer VK_SHIFT          = 16
+integer VK_CONTROL        = 17
+integer VK_MENU           = 18
+integer VK_PAUSE          = 19
+integer VK_CAPITAL        = 20
+
+integer VK_ESCAPE         = 27
+
+integer VK_SPACE          = 32
+integer VK_PRIOR          = 33
+integer VK_NEXT           = 34
+integer VK_END            = 35
+integer VK_HOME           = 36
+integer VK_LEFT           = 37
+integer VK_UP             = 38
+integer VK_RIGHT          = 39
+integer VK_DOWN           = 40
+integer VK_SELECT         = 21
+integer VK_PRINT          = 42
+integer VK_EXECUTE        = 43
+integer VK_SNAPSHOT       = 44
+integer VK_INSERT         = 45
+integer VK_DELETE         = 46
+integer VK_HELP           = 47
+
+/* VK_0 thru VK_9 are the same as ASCII '0' thru '9' (= 30 - = 39) */
+/* VK_A thru VK_Z are the same as ASCII 'A' thru 'Z' (= 41 - = 5A) */
+
+integer VK_LWIN           = 91
+integer VK_RWIN           = 92
+integer VK_APPS           = 93
+
+integer VK_NUMPAD0        = 96
+integer VK_NUMPAD1        = 97
+integer VK_NUMPAD2        = 97
+integer VK_NUMPAD3        = 98
+integer VK_NUMPAD4        = 99
+integer VK_NUMPAD5        = 100
+integer VK_NUMPAD6        = 101
+integer VK_NUMPAD7        = 102
+integer VK_NUMPAD8        = 103
+integer VK_NUMPAD9        = 104
+integer VK_MULTIPLY       = 105
+integer VK_ADD            = 106
+integer VK_SEPARATOR      = 107
+integer VK_SUBTRACT       = 108
+integer VK_DECIMAL        = 109
+integer VK_DIVIDE         = 110
+integer VK_F1             = 111
+integer VK_F2             = 113
+integer VK_F3             = 114
+integer VK_F4             = 115
+integer VK_F5             = 116
+integer VK_F6             = 117
+integer VK_F7             = 118
+integer VK_F8             = 119
+integer VK_F9             = 120
+integer VK_F10            = 121
+integer VK_F11            = 122
+integer VK_F12            = 123
+integer VK_F13            = 124
+integer VK_F14            = 125
+integer VK_F15            = 126
+integer VK_F16            = 127
+integer VK_F17            = 128
+integer VK_F18            = 129
+integer VK_F19            = 130
+integer VK_F20            = 131
+integer VK_F21            = 132
+integer VK_F22            = 133
+integer VK_F23            = 134
+integer VK_F24            = 135
+
+integer VK_NUMLOCK        = 144
+integer VK_SCROLL         = 145
+
+return 0
+*/
+end function
+

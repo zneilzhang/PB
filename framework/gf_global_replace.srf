@@ -1,0 +1,12 @@
+HA$PBExportHeader$gf_global_replace.srf
+global type gf_global_replace from function_object
+end type
+
+forward prototypes
+global function string gf_global_replace (string as_source, string as_old, string as_new, boolean ab_ignorecase)
+end prototypes
+
+global function string gf_global_replace (string as_source, string as_old, string as_new, boolean ab_ignorecase);
+RETURN gnv_funciones_string.of_globalreplace(as_source, as_old, as_new, ab_ignorecase)
+end function
+

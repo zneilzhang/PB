@@ -1,0 +1,119 @@
+HA$PBExportHeader$gf_rfc_correcto.srf
+$PBExportComments$[SANH] Valida que el registro federal de contribuyentes (RFC) haya sido capturado correctamente.
+global type gf_rfc_correcto from function_object
+end type
+
+forward prototypes
+global function boolean gf_rfc_correcto (string as_rfc)
+end prototypes
+
+global function boolean gf_rfc_correcto (string as_rfc);//------------------------------------------------------------------
+//  MODULO/FUNCION	: gf_rfc_correcto
+//
+//  DESCRIPCION		: revisa que el RFC que se consulte (as_rfc) pase todas las validaciones y avise por una variable
+//							  boleana si paso o no paso las validaciones.
+// 
+//  EVENTO/ARGUMENTOS: as_rfc		RFC que se revisara para saber si es correcto
+//
+//  DEVUELVE			:
+//		 TRUE			: 	Si no hubo errores
+//		 FALSE		:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  13/JUN/01	SNH	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+string  ls_iniciales_rfc, ls_fecha_rfc, ls_homoclave_rfc,ls_objeto, ls_tipo_persona
+long		ll_mes_rfc, ll_dia_rfc
+		
+IF isnull(as_rfc) or trim(as_rfc) = '' THEN 
+	Messagebox(gs_nombreapp , "No se ha capturado el RFC",Exclamation!)
+	RETURN FALSE
+END IF
+
+// Resuelve si se trata de una persona moral o fisica
+// Persona moral
+IF IsNumber(Mid(as_rfc,4,1)) THEN
+	ls_tipo_persona = 'M'
+	ls_iniciales_rfc	= Mid ( as_rfc, 1 , 3)
+	ls_fecha_rfc		= Mid ( as_rfc, 4 , 6)
+	ls_homoclave_rfc	= Mid ( as_rfc, 10, 3)	
+//Persona fisica
+ELSE
+	ls_tipo_persona = 'F'
+	ls_iniciales_rfc	= Mid ( as_rfc, 1 , 4)
+	ls_fecha_rfc		= Mid ( as_rfc, 5 , 6)
+	ls_homoclave_rfc	= Mid ( as_rfc, 11 , 3)
+END IF
+
+// Valida la cantidad de caracteres
+IF ls_tipo_persona = 'F' THEN
+	IF len(trim(as_rfc)) <> 13 THEN
+		Messagebox(gs_nombreapp , "Es necesario que proporcione 13 caracteres, para una persona f$$HEX1$$ed00$$ENDHEX$$sica.",Exclamation!)
+		RETURN FALSE
+	END IF
+ELSE
+	IF len(trim(as_rfc)) <> 12 THEN
+		Messagebox(gs_nombreapp , "Es necesario que proporcione 12 caracteres, para una persona moral",Exclamation!)
+		RETURN FALSE
+	END IF
+END IF
+
+//ls_iniciales_rfc
+IF ls_tipo_persona = 'F' THEN
+	IF	Match(ls_iniciales_rfc, "[A-Z][A-Z][A-Z][A-Z]$") = FALSE THEN
+		messagebox(gs_nombreapp, 'En las PRIMERAS 4 posiciones solo se pueden introducir letras may$$HEX1$$fa00$$ENDHEX$$sculas')
+		RETURN FALSE
+	END IF
+ELSE
+	IF	Match(ls_iniciales_rfc, "[A-Z][A-Z][A-Z]$") = FALSE THEN
+		messagebox(gs_nombreapp, 'En las PRIMERAS 3 posiciones solo se pueden introducir letras may$$HEX1$$fa00$$ENDHEX$$sculas')
+		RETURN FALSE
+	END IF
+END IF
+
+//ls_fecha_rfc
+IF	not Match(ls_fecha_rfc, "[0-9]*$") = TRUE THEN
+	IF ls_tipo_persona = 'F' THEN
+		messagebox(gs_nombreapp, 'De la posici$$HEX1$$f300$$ENDHEX$$n 5 a la posici$$HEX1$$f300$$ENDHEX$$n 10, solo se pueden ~r~nintroducir n$$HEX1$$fa00$$ENDHEX$$meros, los cuales representan una fecha con el formato "AAMMDD"')
+	ELSE
+		messagebox(gs_nombreapp, 'De la posici$$HEX1$$f300$$ENDHEX$$n 4 a la posici$$HEX1$$f300$$ENDHEX$$n 9, solo se pueden ~r~nintroducir n$$HEX1$$fa00$$ENDHEX$$meros, los cuales representan una fecha con el formato "AAMMDD"')
+	END IF
+	RETURN FALSE
+END IF
+
+//Valida el MES de la fecha contenida en el "rfc_proveedor", el cual tiene un formato de "YYMMDD"
+ll_mes_rfc = long(mid(ls_fecha_rfc,3,2))
+IF ll_mes_rfc < 0 or ll_mes_rfc > 12 THEN
+	IF ls_tipo_persona = 'F' THEN
+		messagebox(gs_nombreapp, 'De la posici$$HEX1$$f300$$ENDHEX$$n 7 a la 8, el valor introducido (' + string(ll_mes_rfc) + ') no corresponde a ninguno de los meses del a$$HEX1$$f100$$ENDHEX$$o')
+	ELSE
+		messagebox(gs_nombreapp, 'De la posici$$HEX1$$f300$$ENDHEX$$n 6 a la 7, el valor introducido (' + string(ll_mes_rfc) + ') no corresponde a ninguno de los meses del a$$HEX1$$f100$$ENDHEX$$o')
+	END IF
+	Return FALSE
+END IF
+
+//Valida el DIA de la fecha contenida en el "rfc_proveedor", el cual tiene un formato de "YYMMDD"		
+ll_dia_rfc = long(mid(ls_fecha_rfc,5,2))
+IF ll_dia_rfc < 0 or ll_dia_rfc > 31 THEN
+	IF ls_tipo_persona = 'F' THEN
+		messagebox(gs_nombreapp, 'De la posici$$HEX1$$f300$$ENDHEX$$n 9 a la 10, el valor introducido (' + string(ll_mes_rfc) + ') no corresponde a ninguno de los dias del mes')
+	ELSE
+		messagebox(gs_nombreapp, 'De la posici$$HEX1$$f300$$ENDHEX$$n 8 a la 9, el valor introducido (' + string(ll_mes_rfc) + ') no corresponde a ninguno de los dias del meses del a$$HEX1$$f100$$ENDHEX$$o')
+	END IF
+	Return FALSE
+END IF
+
+//ls_homoclave_rfc
+IF	Match(ls_homoclave_rfc, "^[0-9A-Z]+$") = false THEN
+	IF ls_tipo_persona = 'F' THEN
+		messagebox(gs_nombreapp, 'De la posici$$HEX1$$f300$$ENDHEX$$n 11 a la ~r~nposici$$HEX1$$f300$$ENDHEX$$n 13, solo se pueden introducir n$$HEX1$$fa00$$ENDHEX$$meros y letras.')
+	ELSE
+		messagebox(gs_nombreapp, 'De la posici$$HEX1$$f300$$ENDHEX$$n 10 a la ~r~nposici$$HEX1$$f300$$ENDHEX$$n 12, solo se pueden introducir n$$HEX1$$fa00$$ENDHEX$$meros y letras.')
+	END IF
+	RETURN FALSE
+END IF
+
+RETURN TRUE
+end function
+

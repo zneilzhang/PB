@@ -1,0 +1,123 @@
+HA$PBExportHeader$gf_num_to_letras.srf
+$PBExportComments$Funcion convierte numeros a letras
+global type gf_num_to_letras from function_object
+end type
+
+forward prototypes
+global function string gf_num_to_letras (decimal number_to_convert, string desc_moneda, string abrev_moneda)
+end prototypes
+
+global function string gf_num_to_letras (decimal number_to_convert, string desc_moneda, string abrev_moneda);STRING ls_unidades, ls_diez, ls_veinte, ls_Decenas, ls_number_string, ls_converted, ls_cents, ls_centenas,	ls_string, ls_desc_moneda, ls_ul_car
+LONG		ll_posicion
+//             0        1        2         3         4         5         6         7         8         9         0         1         2         
+//             12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
+ls_unidades = "      UN    DOS   TRES  CUATROCINCO SEIS  SIETE OCHO  NUEVE "							//Eran 5, son  6
+ls_diez     = "DIEZ      ONCE      DOCE      TRECE     CATORCE   QUINCE    DIECISEIS DIECISIETEDIECIOCHO DIECINUEVE "	//Eran 9, son 10
+ls_veinte	= "    VEINTIUN   VEINTIDOS  VEINTITRESVEINTICUATRO VEINTICINCO  VEINTISEIS VEINTISIETE  VEINTIOCHO VEINTINUEVE"  // Son 12 Posiciones
+ls_Decenas  = "VEINTE   TREINTA  CUARENTA CINCUENTASESENTA  SETENTA  OCHENTA  NOVENTA  "			//	Eran 7, son 9
+ls_centenas = "         CIEN   DOSCIENTOS  TRESCIENTOSCUATROCIENTOS   QUINIENTOS  SEISCIENTOS  SETECIENTOS  OCHOCIENTOS  NOVECIENTOS "
+
+/*  Almacena la Cantidad completa a un String  */
+If number_to_convert < 0 Then
+	number_to_convert = number_to_convert * -1
+End If 
+ 
+ls_number_string = String ( number_to_convert, "000000.00" )
+
+/*  Checa para Cien(tos) de Mil(es)  */
+If Long ( Mid ( ls_number_string, 1, 1 ) ) > 0 Then
+	ll_posicion = Long ( Mid ( ls_number_string, 1, 1) ) *13 - 12
+	ls_string   = Trim ( Mid ( ls_centenas,ll_posicion, 13 ) )
+	ls_converted = Trim ( Mid ( ls_centenas, Long ( Mid ( ls_number_string, 1, 1) ) *13 - 12, 13 ) )
+	If Mid ( ls_number_string, 2, 2 ) = "00" Then
+		ls_converted = ls_converted + " MIL "
+	ELSE
+		IF TRIM ( ls_converted ) = 'CIEN' THEN 
+			ls_converted = ls_converted + "TO "
+		ELSE
+			ls_converted = ls_converted + " "
+		END IF
+	End If 
+End If 
+
+/*  Checa para Decena(s) de Mil(es)  */
+IF LONG ( MID ( ls_number_string, 2, 1 ) ) = 2 AND LONG ( MID ( ls_number_string, 3, 1 ) ) > 0 THEN
+	ll_posicion = LONG ( MID ( ls_number_string, 3, 1 ) ) * 12 - 11
+	ls_string   = TRIM ( Mid ( ls_Veinte, ll_posicion, 12 ) )
+//	IF LEN ( TRIM ( ls_converted ) ) > 0 THEN ls_converted = ls_converted + ' '
+	ls_converted = ls_converted + ls_string + ' MIL '
+ELSE	
+If Long ( Mid ( ls_number_string, 2, 1 ) ) > 1 Then
+	ll_posicion = Long ( Mid ( ls_number_string, 2, 1 ) ) *9 - 17
+	ls_string   = Trim ( Mid ( ls_Decenas, ll_posicion, 9 ) )
+	ls_converted = ls_converted + Trim ( Mid ( ls_Decenas, Long ( Mid ( ls_number_string, 2, 1 ) ) *9 - 17, 9 ) )
+	If Long ( Mid ( ls_number_string, 3, 1 ) ) > 0 Then
+		ls_converted = ls_converted + " Y " + Trim ( Mid ( ls_unidades, Long ( Mid ( ls_number_string, 3, 1 ) ) *6+1, 6 ) )
+	End If 
+	ls_converted = ls_converted + " MIL "
+ElseIf Long ( Mid ( ls_number_string, 2, 1 ) ) = 1 Then
+	ll_posicion = Long ( Mid ( ls_number_string, 3, 1 ) ) *10+1
+	ls_converted = ls_converted + Trim ( Mid ( ls_diez, Long ( Mid ( ls_number_string, 3, 1 ) ) *10+1, 10) ) + " MIL "
+ElseIf Long ( Mid ( ls_number_string, 3, 1 ) ) = 1 Then
+	ll_posicion = Long ( Mid ( ls_number_string, 3, 1 ) ) *6+1
+	ls_converted = ls_converted + Trim ( Mid ( ls_unidades, Long ( Mid ( ls_number_string, 3, 1 ) ) *6+1, 6 ) ) + " MIL "
+ElseIf Long ( Mid ( ls_number_string, 3, 1 ) ) > 1 Then		// correccion de Bug
+	ll_posicion = Long ( Mid ( ls_number_string, 3, 1 ) ) *6+1
+	ls_converted = ls_converted + Trim ( Mid ( ls_unidades, Long ( Mid ( ls_number_string, 3, 1 ) ) *6+1, 6 ) ) + " MIL "
+End If 
+END If
+
+/*  Checa para Cien(tos)  */
+If Mid ( ls_number_string, 4, 1 ) > "0" Then
+	ll_posicion = Long ( Mid ( ls_number_string, 4, 1 ) ) *13 - 12
+	ls_converted = ls_converted + Trim ( Mid ( ls_centenas, Long ( Mid ( ls_number_string, 4, 1) ) *13 - 12, 13 ) )
+	IF Mid ( ls_number_string, 4, 1 ) = "1" AND MID ( ls_number_string, 5, 2 ) <> '00' THEN
+		ls_converted = ls_converted + 'TO '
+	ELSE
+		ls_converted = ls_converted + ' '
+	END IF
+End If
+
+/*  Checa para Decenas y unidades  */
+IF LONG ( MID ( ls_number_string, 5, 1 ) ) = 2 AND LONG ( MID ( ls_number_string, 6, 1 ) ) > 0 THEN
+	ll_posicion = LONG ( MID ( ls_number_string, 6, 1 ) ) * 12 - 11
+	ls_string   = TRIM ( Mid ( ls_Veinte, ll_posicion, 12 ) )
+//	IF LEN ( TRIM ( ls_converted ) ) > 0 THEN ls_converted = ls_converted + ' '
+	ls_converted = ls_converted + ls_string
+ELSE
+If Long ( Mid ( ls_number_string, 5, 1 ) )  > 1 Then
+	ls_converted = ls_converted + Trim ( Mid ( ls_Decenas, Long ( Mid ( ls_number_string, 5, 1 ) ) *9 - 17, 9 ) )
+	If Long ( Mid ( ls_number_string, 6, 1 ) ) > 0 Then
+		ls_converted = ls_converted + " Y " + Trim ( Mid ( ls_unidades, Long ( Mid ( ls_number_string, 6, 1 ) ) *6+1, 6 ) )
+	End If
+ElseIf Long ( Mid ( ls_number_string, 5, 1 ) ) = 1 Then
+	ls_converted = ls_converted + Trim ( Mid ( ls_diez, Long ( Mid ( ls_number_string, 6, 1 ) ) *10+1, 10 ) )
+Else
+	ls_converted = ls_converted + Trim ( Mid ( ls_unidades, Long ( Mid ( ls_number_string, 6, 1 ) ) *6+1, 6 ) )
+End If
+END IF
+
+/*  Convierte lugares decimales a un string conteniendo centavos  */
+ls_cents = Mid ( ls_number_string, 8, 2 ) 
+
+If ls_converted = "" Then
+	ls_converted = "CERO"
+End If
+
+//ls_ul_car = lower(mid(desc_moneda,len(desc_moneda),1))
+//Choose Case ls_ul_car
+//	Case 'a','e','i','o','u' 
+//		ls_desc_moneda = trim(Upper(desc_moneda))+'S'
+//	Case Else
+//		ls_desc_moneda = trim(Upper(desc_moneda))+'ES'
+//End Choose 
+
+IF TRIM ( ls_converted ) = "UN" THEN
+	ls_converted = TRIM ( ls_converted ) + " " + desc_moneda + " " + ls_cents + "/100 " + abrev_moneda
+ELSE
+	ls_converted = TRIM ( ls_converted ) + " " + ls_desc_moneda + " " + ls_cents + "/100 " + abrev_moneda
+END IF
+
+RETURN ls_converted
+end function
+

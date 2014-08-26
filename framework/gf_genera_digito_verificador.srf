@@ -1,0 +1,67 @@
+HA$PBExportHeader$gf_genera_digito_verificador.srf
+$PBExportComments$(LAC) Funci$$HEX1$$f300$$ENDHEX$$n que genera el d$$HEX1$$ed00$$ENDHEX$$gito verificador
+global type gf_genera_digito_verificador from function_object
+end type
+
+forward prototypes
+global function integer gf_genera_digito_verificador (decimal adec_codbarra)
+end prototypes
+
+global function integer gf_genera_digito_verificador (decimal adec_codbarra);//------------------------------------------------------------------
+//  MODULO/FUNCION	: gf_genera_digito_verificador
+//
+//  DESCRIPCION		: Funci$$HEX1$$f300$$ENDHEX$$n que genera el d$$HEX1$$ed00$$ENDHEX$$gito verificador
+// 
+//  EVENTO/ARGUMENTOS: 
+//		adec_codbarra		: C$$HEX1$$f300$$ENDHEX$$digo de barra a checar
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  22/MAR/00	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+Int			li_largo						//	Longitud del c$$HEX1$$f300$$ENDHEX$$digo de barra sin el digito Verificador
+Int			li_verificador					//	Digito Verificador
+Int			li_i								//	Contador auxiliar del FOR
+Int			li_suma						//	Suma de las Multiplicaciones de los componentes de la variable ld0_verificar
+Int			li_x							// Elemento de la veriable ld0_verificar a ser manipulado
+Int			li_paso						//	Auxiliar para detectar si es par o non la posicion del elemento
+Int			li_digito						//	Resultado y digito a comparar con el digito verificador
+Int			li_ciclo						//	Contador de Ciclos efectuados
+String		ls_verificar					// Variable String Auxiliar para obtener cada uno de los elementos a ser revisados
+dec{0}	ld0_verificar					// Numero a ser revisado
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+SetPointer(Hourglass!)
+
+ls_verificar	= String ( adec_codbarra )
+li_largo 		= Len ( ls_verificar )
+li_suma 		= 0
+
+For li_i = li_largo to 1 step -1
+	li_ciclo ++
+	li_x = Dec ( Mid ( ls_verificar , li_i , 1 ) )
+	li_paso = mod ( li_ciclo , 2 )
+	IF li_paso = 1 or li_ciclo = 1 THEN
+		li_suma = li_suma + li_x * 3
+	ELSE
+		li_suma = li_suma + li_x
+	END IF
+NEXT
+
+li_digito = 10 - mod ( li_suma , 10 ) 
+IF li_digito = 10 THEN
+	li_digito = 0
+END IF
+
+Return li_digito
+end function
+

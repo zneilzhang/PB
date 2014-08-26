@@ -1,0 +1,95 @@
+HA$PBExportHeader$gf_convierte_codigobarras_ean13.srf
+global type gf_convierte_codigobarras_ean13 from function_object
+end type
+
+forward prototypes
+global function string gf_convierte_codigobarras_ean13 (decimal adec0_codigo)
+end prototypes
+
+global function string gf_convierte_codigobarras_ean13 (decimal adec0_codigo);//------------------------------------------------------------------
+//  MODULO/FUNCION	:	gf_convierte_codigobarras_ean13
+//
+//  DESCRIPCION		: 
+//		Rutina que convierte un valor numerico a la representacion
+//		de un codigo de barras devolviendo una cadena.
+//
+//  EVENTO/ARGUMENTOS: 
+//		adec0_codigo	: Codigo a convertir.
+//
+//  DEVUELVE			:
+//		La cadena	: 	Si no hubo errores
+//		""				:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error o no se encontr$$HEX2$$f3002000$$ENDHEX$$la subcadena.
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  22/MAR/00	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+Integer	li_i, li_DifPrimDigito, li_DifPrimGrupo, li_DifSeguGrupo
+String	ls_Regresa, ls_NULL, lar_valores[10], ls_Codigo, ls_cadena
+decimal{0} ld_adec0_codigo
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+SetPointer(Hourglass!)
+
+ld_adec0_codigo = adec0_codigo 
+
+li_DifPrimDigito 	= ASC( 'u' ) - ASC ( '0' )
+li_DifPrimGrupo	= ASC( '!' ) - ASC ( '0' )
+li_DifSeguGrupo	= ASC( 'a' ) - ASC ( '0' )
+
+lar_valores[1]  = "AAAAAA"
+lar_valores[2]  = "AABABB"
+lar_valores[3]  = "AABBAB"
+lar_valores[4]  = "AABBBA"
+lar_valores[5]  = "ABAABB"
+lar_valores[6]  = "ABBAAB"
+lar_valores[7]  = "ABBBAA"
+lar_valores[8]  = "ABABAB"
+lar_valores[9]  = "ABABBA"
+lar_valores[10] = "ABBABA"
+											
+ls_codigo	= STRING ( ld_adec0_codigo, FILL ( '0', 13 ) )
+ls_Cadena	= ''
+
+
+FOR li_i=1 TO 13
+
+	If li_i = 1 THEN
+		ls_cadena = Char( ASC(Mid(ls_codigo, li_i, 1) ) + li_DifPrimDigito)
+		ls_cadena = ls_cadena + "<"
+	END IF
+
+	
+	IF li_i > 1 AND li_i < 8 THEN
+
+		IF MID (lar_valores[Long(MID(ls_codigo, 1, 1))+1], li_i - 1, 1) = "B" THEN
+			ls_cadena = ls_cadena + Char( ( Asc(Mid(ls_codigo, li_i, 1)) + li_DifPrimGrupo ) + 74)
+		ELSE
+			ls_cadena = ls_cadena + Char( Asc(Mid(ls_codigo, li_i, 1)) + li_DifPrimGrupo)
+		END IF
+		
+	END IF
+
+	IF li_i = 8 THEN
+		ls_cadena = ls_cadena + "="
+	END IF
+
+	IF li_i > 7 AND li_i < 13 THEN
+	
+		ls_cadena = ls_cadena + Char( ASC(Mid(ls_codigo, li_i, 1)) + li_DifSeguGrupo)
+		
+	END IF
+
+	IF li_i = 13 THEN
+		ls_cadena = ls_cadena + Char( ASC(MID(ls_codigo, li_i, 1)) + li_DifSeguGrupo)
+		ls_cadena = ls_cadena + "<"
+	END IF
+NEXT
+
+RETURN ls_Cadena
+end function
+

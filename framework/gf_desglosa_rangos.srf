@@ -1,0 +1,121 @@
+HA$PBExportHeader$gf_desglosa_rangos.srf
+$PBExportComments$(LAC) Rutina que desglosa rangos dados
+global type gf_desglosa_rangos from function_object
+end type
+
+forward prototypes
+global function integer gf_procesa_rangos (string as_rangos, ref n_ds ads_desglose)
+global function integer gf_desglosa_rangos (string as_rangos, ref n_ds ads_desglose)
+end prototypes
+
+global function integer gf_procesa_rangos (string as_rangos, ref n_ds ads_desglose);//------------------------------------------------------------------
+//  FUNCION/EVENTO	:	gf_procesa_rangos
+//
+//  DESCRIPCION		:	Desglosa en un datastore el rango dado
+// 
+//  ARGUMENTOS			: 
+//		as_rangos		:	String con los rangos espcificados
+//								Ejemplo: "1-10", "1,5,8", "1-10,15-20,21,22,23"
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  16/FEB/03	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// OJO!, EN ESTE EVENTO SE ESTA BRINCANDO EL CODIGO DEL ANCESTRO
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+
+return 0
+
+end function
+
+global function integer gf_desglosa_rangos (string as_rangos, ref n_ds ads_desglose);//------------------------------------------------------------------
+//  FUNCION/EVENTO	:	gf_procesa_rangos
+//
+//  DESCRIPCION		:	Desglosa en un datastore el rango dado
+// 
+//  ARGUMENTOS			: 
+//		as_rangos		:	String con los rangos espcificados
+//								Ejemplo: "1-10", "1,5,8", "1-10,15-20,21,22,23"
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  06/MAY/05	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+long		ll_renglon, ll_aux, ll_izq, ll_der, ll_indice
+integer	li_contador
+string	lsarr_comas[], ls_aux
+n_cst_string  lnv_string
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+ads_desglose = create n_ds
+ads_desglose.dataobject = 'd_desglosa_rango'
+
+//Desglosa los valores separados por comas
+lnv_string.of_parsetoarray(as_rangos, ',',lsarr_comas)
+
+for li_contador = 1 to upperbound(lsarr_comas)
+	ls_aux = lsarr_comas[li_contador]
+	//Desglosa los valores separados por guiones en caso de aplicar
+	ll_izq = long(gnv_funciones_string.of_desglosa_string(ls_aux, 1, '-'))
+	ll_der = long(gnv_funciones_string.of_desglosa_string(ls_aux, 2, '-'))
+
+	//...si tiene un rango
+	if ll_izq > 0  and ll_der > 0 then
+		if ll_izq > ll_der then
+			ll_aux = ll_izq
+			ll_izq = ll_der
+			ll_der = ll_aux
+		end if
+		for ll_indice = ll_izq to ll_der
+			//..busca si no existe ya
+			if ads_desglose.find('numero=' + string(ll_indice), 1, ads_desglose.rowcount()) = 0 then
+				ll_renglon = ads_desglose.insertrow(0)
+				ads_desglose.object.numero[ll_renglon] = ll_indice
+			end if
+		next
+	else
+		//...si tiene solo un valor
+		if ll_izq > 0 then
+			if ads_desglose.find('numero=' + string(ll_izq), 1, ads_desglose.rowcount()) = 0 then
+				ll_renglon = ads_desglose.insertrow(0)
+				ads_desglose.object.numero[ll_renglon] = ll_izq
+			end if
+		else
+			if ll_der > 0 then
+				if ads_desglose.find('numero=' + string(ll_der), 1, ads_desglose.rowcount()) = 0 then
+					ll_renglon = ads_desglose.insertrow(0)
+					ads_desglose.object.numero[ll_renglon] = ll_der
+				end if
+			end if
+		end if
+	end if
+next
+
+return 0 
+
+end function
+

@@ -1,0 +1,11 @@
+HA$PBExportHeader$gstr_param_ayuda.srs
+$PBExportComments$(DT) Estructura para los par$$HEX1$$e100$$ENDHEX$$metros de la ventana F1
+global type gstr_param_ayuda from structure
+	string		cve_ayuda
+	string		titulo
+	string		where
+	string		regresa_ayuda
+	n_tr		conexion_cia
+	boolean		ab_seleccion_multiple
+end type
+

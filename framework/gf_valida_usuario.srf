@@ -1,0 +1,29 @@
+HA$PBExportHeader$gf_valida_usuario.srf
+global type gf_valida_usuario from function_object
+end type
+
+forward prototypes
+global function boolean gf_valida_usuario (long as_usr, string as_pswd)
+end prototypes
+
+global function boolean gf_valida_usuario (long as_usr, string as_pswd);
+Integer	li_valido
+
+SELECT isNull(1, -1)
+INTO	:li_valido
+FROM	ek010ab
+where num = :as_usr AND pass = ENCRYPT(:as_pswd, :as_usr );
+
+IF SQLCA.SQLCODE < 0 THEN
+	RETURN FALSE
+END IF
+
+ IF li_valido = 1 THEN 
+	RETURN TRUE
+ELSE
+	RETURN FALSE
+END IF
+
+
+end function
+

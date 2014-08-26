@@ -1,0 +1,47 @@
+HA$PBExportHeader$gf_rellena_string.srf
+$PBExportComments$(LAC) Funci$$HEX1$$f300$$ENDHEX$$n que rellena hacia la izquierda un string con un caracter especificado.
+global type gf_rellena_string from function_object
+end type
+
+forward prototypes
+global function string gf_rellena_string (readonly string as_string, readonly string as_relleno, readonly integer ai_caracteres_maximos)
+end prototypes
+
+global function string gf_rellena_string (readonly string as_string, readonly string as_relleno, readonly integer ai_caracteres_maximos);//------------------------------------------------------------------
+//  MODULO/FUNCION	: gf_rellena_string
+//
+//  DESCRIPCION		: Funci$$HEX1$$f300$$ENDHEX$$n que rellena hacia la izquierda un string con un caracter especificado 
+//		hasta completar el n$$HEX1$$fa00$$ENDHEX$$mero de caracteres maximo
+// 
+//  EVENTO/ARGUMENTOS: 
+//		as_string					: 	String al que se agregara el relleno
+//		as_relleno					:	Caracter que se utilizara para el relleno
+//		ai_caracteres_maximos	:	Limite para agregar relleno
+//
+//  DEVUELVE			:
+//		El string rellenado		: Si es correcto el resultado
+//		""								: Si hay error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  22/MAR/00	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+long ll_veces
+string ls_resultado
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+SetPointer(Hourglass!)
+
+// NUMERO DE VECES QUE SERA REPETIDO EL RELLENO EN EL RESULTADO
+ll_veces = ai_caracteres_maximos - Len (as_string)
+
+ls_resultado = Fill(as_relleno,ll_veces) + as_string
+
+RETURN ls_resultado
+end function
+

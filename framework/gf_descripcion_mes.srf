@@ -1,0 +1,138 @@
+HA$PBExportHeader$gf_descripcion_mes.srf
+$PBExportComments$(LAC) Funci$$HEX1$$f300$$ENDHEX$$n que obtiene la descripci$$HEX1$$f300$$ENDHEX$$n del mes
+global type gf_descripcion_mes from function_object
+end type
+
+forward prototypes
+global function integer gf_descripcion_mes (u_dw adw_objeto, string as_criterio)
+global function string gf_descripcion_mes (integer ai_num_mes, integer ai_tipo)
+end prototypes
+
+global function integer gf_descripcion_mes (u_dw adw_objeto, string as_criterio);//------------------------------------------------------------------
+//  MODULO/FUNCION	:	gf_filtra
+//
+//  DESCRIPCION		:	Funci$$HEX1$$f300$$ENDHEX$$n que aplica un Filtro al DW dado de acuerdo al Criterio
+//		especificado.
+// 
+//  EVENTO/ARGUMENTOS: 
+//		adw_objeto	: Referencia al DW
+//		as_criterio	: String con el Criterio a aplicar. Si es Nulo o
+//						  "", entonces se eliminar$$HEX2$$e1002000$$ENDHEX$$el filtro actual
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  22/MAR/00	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+Integer li_Regreso
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+SetPointer(Hourglass!)
+
+//Valida nulos
+If IsNull(as_criterio) Then as_criterio = ""
+
+//$$HEX1$$bf00$$ENDHEX$$Es v$$HEX1$$e100$$ENDHEX$$lido el DW?
+If Not (IsValid(adw_objeto)) Then Return -1
+
+If adw_objeto.SetFilter(as_criterio) = -1 Then Return -1
+If adw_objeto.Filter( ) = -1 Then Return -1
+
+Return 0
+end function
+
+global function string gf_descripcion_mes (integer ai_num_mes, integer ai_tipo);//------------------------------------------------------------------
+//  MODULO/FUNCION	:	gf_descripcion_mes
+//
+//  DESCRIPCION		:	Obtiene la descripci$$HEX1$$f300$$ENDHEX$$n del mes asociado al n$$HEX1$$fa00$$ENDHEX$$mero dado
+// 
+//  EVENTO/ARGUMENTOS: 
+//		ai_num_mes	: N$$HEX1$$fa00$$ENDHEX$$mero del mes
+//		ai_tipo		: 0 - Abreviado, 1 - Completo
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  16/OCT/07	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+string ls_mm, ls_mmm
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+
+if ai_num_mes <= 0 or ai_num_mes > 12 then return ""
+
+choose case ai_num_mes
+	case 1
+		ls_mm = "Ene"
+		ls_mmm = "Enero"
+		
+	case 2
+		ls_mm = "Feb"
+		ls_mmm = "Febrero"
+		
+	case 3
+		ls_mm = "Mar"
+		ls_mmm = "Marzo"
+		
+	case 4
+		ls_mm = "Abr"
+		ls_mmm = "Abril"
+		
+	case 5
+		ls_mm = "May"
+		ls_mmm = "Mayo"
+		
+	case 6
+		ls_mm = "Jun"
+		ls_mmm = "Junio"
+		
+	case 7
+		ls_mm = "Jul"
+		ls_mmm = "Juio"
+		
+	case 8
+		ls_mm = "Ago"
+		ls_mmm = "Agosto"
+		
+	case 9
+		ls_mm = "Sep"
+		ls_mmm = "Septiembre"
+		
+	case 10
+		ls_mm = "Oct"
+		ls_mmm = "Octubre"
+		
+	case 11
+		ls_mm = "Nov"
+		ls_mmm = "Noviembre"
+		
+	case 12
+		ls_mm = "Dic"
+		ls_mmm = "Diciembre"
+		
+end choose
+
+if ai_tipo = 1 then
+	return ls_mm
+else
+	return ls_mmm
+end if
+
+end function
+

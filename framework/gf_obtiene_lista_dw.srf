@@ -1,0 +1,82 @@
+HA$PBExportHeader$gf_obtiene_lista_dw.srf
+$PBExportComments$(LAC) Funci$$HEX1$$f300$$ENDHEX$$n que guarda en un arreglo todos los dw contenidos a partir del objeto origen
+global type gf_obtiene_lista_dw from function_object
+end type
+
+forward prototypes
+global function integer gf_obtiene_lista_dw (powerobject apo_origen, ref powerobject apo_objetos[])
+end prototypes
+
+global function integer gf_obtiene_lista_dw (powerobject apo_origen, ref powerobject apo_objetos[]);//------------------------------------------------------------------
+//  MODULO/FUNCION	:	gf_obtiene_lista_dw
+//
+//  DESCRIPCION		:	Obtiene la lista (en un arreglo) de todos los dw
+//								contenidos a partir del objeto origen.
+//								NOTA: Se hacen llamadas recursivas a esta funci$$HEX1$$f300$$ENDHEX$$n
+// 
+//  EVENTO/ARGUMENTOS: 
+//		apo_origen		:	Referencia al objeto origen
+//		apo_objetos[]	:	Arreglo en el cual se devuelve por referencia las dw
+//
+//  DEVUELVE			:
+//		  0	: 	Si no hubo errores
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  13/DIC/00	LAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+String		ls_clase
+Integer		li_contador, li_indice
+PowerObject	lpo_objetos, lpo_ciclo_objetos[]
+Object		lo_tipo_objeto
+w_master		lw_objeto
+u_tab			ltab_objeto
+u_tabpg		ltabpg_objeto
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+SetPointer(Hourglass!)
+
+lo_tipo_objeto = apo_origen.typeof()
+ls_clase = apo_origen.classname()
+
+Choose Case lo_tipo_objeto
+	Case	Window!		
+		lw_objeto = apo_origen
+		//Obtiene la lista inicial
+		lpo_ciclo_objetos = lw_objeto.control
+		For li_contador = 1 To upperbound(lpo_ciclo_objetos)
+			gf_obtiene_lista_dw(lpo_ciclo_objetos[li_contador], apo_objetos[])
+		Next
+		
+	Case	Tab!
+		ltab_objeto = apo_origen
+		//Obtiene la lista inicial
+		lpo_ciclo_objetos = ltab_objeto.control
+		For li_contador = 1 To upperbound(lpo_ciclo_objetos)
+			If gf_obtiene_lista_dw(lpo_ciclo_objetos[li_contador], apo_objetos[]) = -1 Then Return -1
+		Next
+		
+	Case	Datawindow!
+		li_indice = upperbound(apo_objetos)
+		apo_objetos[li_indice + 1] = apo_origen
+				
+	Case	userobject!
+		ltabpg_objeto = apo_origen
+		//Obtiene la lista inicial
+		lpo_ciclo_objetos = ltabpg_objeto.control
+		For li_contador = 1 To upperbound(lpo_ciclo_objetos)
+			If gf_obtiene_lista_dw(lpo_ciclo_objetos[li_contador], apo_objetos[]) = -1 Then Return -1
+		Next
+				
+End Choose
+
+Return 0
+end function
+

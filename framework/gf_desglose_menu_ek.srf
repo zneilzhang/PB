@@ -1,0 +1,208 @@
+HA$PBExportHeader$gf_desglose_menu_ek.srf
+global type gf_desglose_menu_ek from function_object
+end type
+
+forward prototypes
+global function integer gf_desglose_menu_ek (menu am_menu, integer ai_nivel, integer ai_fin, ref n_ds ads_menus)
+global function integer gf_desglose_menu_ek (menu am_menu, integer ai_nivel, integer ai_fin, ref n_ds ads_menus, n_ds ads_permisos)
+end prototypes
+
+global function integer gf_desglose_menu_ek (menu am_menu, integer ai_nivel, integer ai_fin, ref n_ds ads_menus);//------------------------------------------------------------------
+//  FUNCION/EVENTO	: gf_desglose_menus
+//
+//  DESCRIPCION		: Funcion recursiva que genera dentro de la 
+// 						  tabla ek_menus unregistro por opcion de menu
+//
+//  ARGUMENTOS			: 
+//		am_menu			: nombre del menu
+//		ai_nivel			: nivel en el que se necuentra dentro del menu
+//		ai_fin   		: 
+//		ads_menus		: nombre del data store en el que se guardan los datos
+//
+//  DEVUELVE			:
+//		  0	: 	Si no tiene hijos
+//		  1   :  Si todo va correctamente
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  30/AGO/05	JAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+
+Integer  ll_desglose, li_nivel, li_regresa, li_fin, li_ciclo, li_visible, li_enable
+String	ls_menu, ls_padre, ls_texto , ls_imagen
+Boolean  lb_visible, lb_enable
+long ll_row
+
+menu	ldarr[], lm_menu, lm_padre
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+ldarr =am_menu.item[]
+li_nivel = ai_nivel
+li_fin = ai_fin
+
+ll_desglose = upperbound(ldarr)
+
+If ll_desglose > 0 Then
+	li_nivel++
+	For li_ciclo = 1 To ll_desglose
+		lm_menu = ldarr[li_ciclo]
+		
+		//Si es cero ya no tiene hijos o si es uno va satisfactoriamente
+		If li_regresa = 0 Or li_regresa = 1 Then
+			
+			ls_menu    = ldarr[li_ciclo].classname()
+			lm_padre   = getparent(ldarr[li_ciclo])
+			ls_padre   = lm_padre.classname()
+			ls_texto   = ldarr[li_ciclo].text
+			lb_visible = ldarr[li_ciclo].visible
+			lb_enable  = ldarr[li_ciclo].enabled
+			ls_imagen = ldarr[li_ciclo].menuimage
+			IF isnull(ls_imagen) OR len(trim(ls_imagen)) = 0 THEN ls_imagen = ldarr[li_ciclo].ToolbarItemName
+			
+			If lb_visible Then
+				li_visible=1
+			Else
+				li_visible=0
+			End If
+			
+			If lb_enable Then
+				li_enable=1
+			Else
+				li_enable=0
+			End If
+			
+			ll_row = ads_menus.InsertRow(0)
+			ads_menus.Object.nombre[ll_row] 			= ls_menu
+			ads_menus.Object.padre[ll_row]			= ls_padre
+			ads_menus.Object.nivel[ll_row] 			= li_nivel
+			ads_menus.Object.texto[ll_row] 			= ls_texto
+			ads_menus.Object.ind_visible[ll_row] 	= li_visible
+			ads_menus.Object.ind_habilitado[ll_row] = li_enable
+			ads_menus.Object.orden[ll_row] 			    = ll_row
+			ads_menus.object.imagen[ll_row] = ls_imagen
+		End IF
+		
+		li_regresa = gf_desglose_menu(lm_menu, li_nivel, li_fin, ads_menus)
+	Next
+Else
+	Return 0
+End IF
+return 1
+end function
+
+global function integer gf_desglose_menu_ek (menu am_menu, integer ai_nivel, integer ai_fin, ref n_ds ads_menus, n_ds ads_permisos);//------------------------------------------------------------------
+//  FUNCION/EVENTO	: gf_desglose_menus
+//
+//  DESCRIPCION		: Funcion recursiva que genera dentro de la 
+// 						  tabla ek_menus unregistro por opcion de menu
+//
+//  ARGUMENTOS			: 
+//		am_menu			: nombre del menu
+//		ai_nivel			: nivel en el que se necuentra dentro del menu
+//		ai_fin   		: 
+//		ads_menus		: nombre del data store en el que se guardan los datos
+//
+//  DEVUELVE			:
+//		  0	: 	Si no tiene hijos
+//		  1   :  Si todo va correctamente
+//		 -1	:	Si hubo alg$$HEX1$$fa00$$ENDHEX$$n error
+//
+//  FECHA    	AUTOR    DESCRIPCION
+//------------------------------------------------------------------
+//  30/AGO/05	JAC	    Creaci$$HEX1$$f300$$ENDHEX$$n	
+//------------------------------------------------------------------
+
+//------------------------------------------------------------------
+// DECLARACIONES LOCALES
+//------------------------------------------------------------------
+
+Integer  ll_desglose, li_nivel, li_regresa, li_fin, li_ciclo, li_visible, li_enable
+String	ls_menu, ls_padre, ls_texto , ls_imagen, ls_tag
+Boolean  lb_visible, lb_enable
+long ll_row, ll_row_find, ll_shortcut
+
+menu	ldarr[], lm_menu, lm_padre
+
+//------------------------------------------------------------------
+// CODIGO DE LA RUTINA
+//------------------------------------------------------------------
+ldarr =am_menu.item[]
+li_nivel = ai_nivel
+li_fin = ai_fin
+
+ll_desglose = upperbound(ldarr)
+
+If ll_desglose > 0 Then
+	li_nivel++
+	For li_ciclo = 1 To ll_desglose
+		lm_menu = ldarr[li_ciclo]
+		
+		//Si es cero ya no tiene hijos o si es uno va satisfactoriamente
+		If li_regresa = 0 Or li_regresa = 1 Then
+			
+			ls_menu    = ldarr[li_ciclo].classname()
+			lm_padre   = getparent(ldarr[li_ciclo])
+			ls_padre   = lm_padre.classname()
+			ls_texto   = ldarr[li_ciclo].text
+			lb_visible = ldarr[li_ciclo].visible
+			lb_enable  = ldarr[li_ciclo].enabled
+			ls_imagen = ldarr[li_ciclo].menuimage
+			ls_tag = ldarr[li_ciclo].tag
+			ll_shortcut = ldarr[li_ciclo].shortcut
+			IF isnull(ls_imagen) OR len(trim(ls_imagen)) = 0 THEN ls_imagen = ldarr[li_ciclo].ToolbarItemName
+			IF isnull(ls_imagen) OR len(trim(ls_imagen)) = 0 THEN ls_imagen = 'AppIcon!'
+			
+			IF ll_shortcut > 0 THEN 
+				//http://help.adobe.com/en_US/AS2LCR/Flash_10.0/help.html?content=00000520.html
+				n_ds lds_keycode
+				lds_keycode = CREATE n_ds
+				lds_keycode.dataobject = "d_ex_gr_function_keys"
+				lds_keycode.Retrieve()
+				ll_shortcut = lds_keycode.Find(" keycode = "+string(ll_shortcut), 1, lds_keycode.RowCount())
+				IF ll_shortcut > 0 THEN ls_texto = gnv_funciones_string.of_globalReplace(ls_texto,lds_keycode.object.function_key[ll_shortcut],"")
+				DESTROY lds_keycode
+			END IF
+			
+			ll_row_find = ads_permisos.Find("menu = '"+ls_menu+"'", 1, ads_permisos.RowCount())
+			
+			IF ll_row_find = 0 THEN CONTINUE
+			ll_row_find = ads_permisos.rowcount()
+			If lb_visible Then
+				li_visible=1
+			Else
+				li_visible=0
+			End If
+			
+			If lb_enable Then
+				li_enable=1
+			Else
+				li_enable=0
+			End If
+			
+			ll_row = ads_menus.InsertRow(0)
+			ads_menus.Object.nombre[ll_row] 			= ls_menu
+			ads_menus.Object.padre[ll_row]			= ls_padre
+			ads_menus.Object.nivel[ll_row] 			= li_nivel
+			ads_menus.Object.texto[ll_row] 			= ls_texto
+			ads_menus.Object.ind_visible[ll_row] 	= li_visible
+			ads_menus.Object.ind_habilitado[ll_row] = li_enable
+			ads_menus.Object.orden[ll_row] 			    = ll_row
+			ads_menus.object.imagen[ll_row] = ls_imagen
+			ads_menus.object.tag[ll_row] = ls_tag
+		End IF
+		
+		li_regresa = gf_desglose_menu_ek(lm_menu, li_nivel, li_fin, ads_menus, ads_permisos)
+	Next
+Else
+	Return 0
+End IF
+return 1
+end function
+
